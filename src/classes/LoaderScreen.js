@@ -10,7 +10,7 @@ const LoaderScreen = ({ route }) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const finalJSON = route?.params?.jsonParams;
-
+    console.log("Received JSON Params -->", JSON.stringify(finalJSON));
     useEffect(() => {
         const init = async () => {
             await initAppContext(finalJSON);
