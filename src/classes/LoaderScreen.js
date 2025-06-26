@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { changeLanguage } from '../../Localization/Localisation';
 import { useDispatch } from 'react-redux';
-import { setCompanyDetails, setUserMenuControl, setUserProfile } from '../../redux/slices/userDataSlice';
-import { initAppContext } from '../../Utility/AppInitializer';
+import { setCompanyDetails, setUserMenuControl, setUserProfile } from '../redux/slices/userDataSlice';
+import { initAppContext } from '../Utility/AppInitializer';
+import { changeLanguage } from '../Localization/Localisation';
 
 const LoaderScreen = ({ route }) => {
     const navigation = useNavigation();
