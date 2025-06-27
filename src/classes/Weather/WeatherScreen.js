@@ -18,7 +18,6 @@ import { Colors } from '../../colors/Colors';
 
 
 const WeatherScreen = ({ route }) => {
-  console.log("routechecking=-=->", route.params.itemData.enablePestForecast)
   const navigation = useNavigation()
   const [loader, setLoader] = useState(false)
   const FILTERS = [translate("Days_Forecast_15"), translate("Hourly")]
