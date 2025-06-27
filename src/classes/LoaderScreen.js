@@ -19,7 +19,7 @@ const LoaderScreen = ({ route }) => {
             dispatch(setUserMenuControl(finalJSON?.userMenuControl));
             dispatch(setUserProfile(finalJSON?.userProfile));
 
-            navigation.navigate(finalJSON.classType)
+            navigation.replace(finalJSON.classType)
 
         };
 

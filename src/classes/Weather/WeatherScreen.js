@@ -724,7 +724,7 @@ const WeatherScreen = ({ route }) => {
                   borderRadius: 40, height: 25, width: 25, alignItems: "center", justifyContent: "center",
                   backgroundColor: "#000"
                 }}>
-                  <Image source={require("../../assets/Images/crossIcon.png")} style={{ height: 10, width: 10, resizeMode: "contain", tintColor: "#fff" }} />
+                  <Image source={require("../../assets/Images/crossMark.png")} style={{ height: 10, width: 10, resizeMode: "contain", tintColor: "#fff" }} />
                 </TouchableOpacity>
                 <Calendar
                   onDayPress={(day) => {
@@ -754,7 +754,7 @@ const WeatherScreen = ({ route }) => {
             <View style={styles.modalSubParentContainer}>
               <View style={styles.closeBtnContainer}>
                 <TouchableOpacity onPress={() => setShowDropDowns(false)}>
-                  <Image source={require('../../assets/Images/crossIcon.png')} style={styles.closeIcon} />
+                  <Image source={require('../../assets/Images/crossMark.png')} style={styles.closeIcon} />
                 </TouchableOpacity>
               </View>
               {cropList?.length > 0 ? (
