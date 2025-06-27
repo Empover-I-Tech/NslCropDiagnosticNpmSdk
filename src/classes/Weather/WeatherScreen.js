@@ -1,22 +1,24 @@
-import { Platform, Text, StatusBar, View, FlatList, Image, TouchableOpacity, Dimensions, Modal, TouchableWithoutFeedback, SafeAreaView, Alert } from 'react-native';
+import { Platform, Text, StatusBar, View, FlatList, StyleSheet, Image, TouchableOpacity, Alert, Dimensions, Modal, TouchableWithoutFeedback, PermissionsAndroid, SafeAreaView } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { translate } from '../../Localization/Localisation';
-import { useNavigation } from '@react-navigation/native';
+import Geolocation from '@react-native-community/geolocation';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 import SimpleToast from 'react-native-simple-toast';
 import styles from './styles';
 import CustomLoader from '../../components/CustomLoader';
 import CustomCircularProgress from '../../components/CustomCircularProgress';
 import moment from 'moment';
 import { Calendar } from 'react-native-calendars';
-import ApiConfig, { MAP_MY_INDIA_URL, STATUS_CODE_OK, STATUS_CODE_SUCCESS_200 } from '../../Networks/ApiConfig';
+import ApiConfig, { MAP_MY_INDIA_URL, STATUS_CODE_103, STATUS_CODE_SUCCESS_200 } from '../../Networks/ApiConfig';
 import ApiService from '../../Networks/ApiService';
 import { getFromAsyncStorage, isNullOrEmptyNOTTrim, MOBILENUMBER, USER_ID } from '../../Utility/Utils';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { Colors } from '../../colors/Colors';
 
 
 const WeatherScreen = ({ route }) => {
-  console.log("routechecking=-=->", route.params)
+  console.log("routechecking=-=->", route.params.itemData.enablePestForecast)
   const navigation = useNavigation()
   const [loader, setLoader] = useState(false)
   const FILTERS = [translate("Days_Forecast_15"), translate("Hourly")]
@@ -29,8 +31,6 @@ const WeatherScreen = ({ route }) => {
   const [selectedCrop, setSelectedCrop] = useState(null)
   const [selectedDatePest, setSelectedDatePest] = useState(translate("Select_Date"));
   const [pestForecastData, setPestForecastData] = useState(null)
-  const [latitude, setLatitude] = useState('')
-  const [longitude, setLongitude] = useState('')
   const [fallBackTest, setFallBackTest] = useState("")
   const [showDropDowns, setShowDropDowns] = useState(false)
   const [cityDet, setCityDet] = useState(null)
@@ -41,6 +41,12 @@ const WeatherScreen = ({ route }) => {
   const [selectedCropId, setSelectedCropId] = useState(null)
   const [rawDate, setRawDate] = useState("")
 
+  const [latitude, setLatitude] = useState('')
+  const [longitude, setLongitude] = useState('')
+  const [mapZoomingLevel, setMapZoomingLevel] = useState(0)
+  console.log("checkinZoominLevel=-=-=>", mapZoomingLevel)
+  console.log("selectedFilter-=-=->", selectedFilter)
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(moment().format("LT"));
@@ -49,28 +55,52 @@ const WeatherScreen = ({ route }) => {
 
   }, []);
 
-  // useEffect(() => {
-  //   getWeatherData(route?.params?.latitude, route?.params?.longitude)
-  //   getDetailsDashBoardData(route?.params?.latitude, route?.params?.longitude)
-  //   setSelectedCrop(null)
-  //   setSelectedDatePest(translate("Select_Date"))
-  //   setPestForecastData(null)
-  //   setRawDate("")
-  // }, [route?.params?.address])
+  useEffect(() => {
+    if (route?.params?.backScreen) {
+      getWeatherData(route?.params?.backScreen?.latitude, route?.params?.backScreen?.longitude)
+      getDetailsDashBoardData(route?.params?.backScreen?.latitude, route?.params?.backScreen?.longitude)
+      console.log("route?.params?.backScreen=-=-=>", route?.params?.backScreen)
+      setLatitude(route?.params?.backScreen?.latitude)
+      setLongitude(route?.params?.backScreen?.longitude)
+      setSelectedCrop(null)
+      setSelectedDatePest(translate("Select_Date"))
+      setPestForecastData(null)
+      setRawDate("")
+      setMapZoomingLevel(route?.params?.backScreen?.zoom)
+    }
+
+  }, [route?.params?.backScreen])
+  console.log("checki=-=-=-=-Latitude", latitude, longitude)
 
   useEffect(() => {
-    getDetailsDashBoardData(route?.params?.itemData?.coord?.lat, route?.params?.itemData?.coord?.lon)
-    setLatitude(route?.params?.itemData?.coord?.lat)
-    setLongitude(route?.params?.itemData?.coord?.lon)
-    getWeatherData(route?.params?.itemData?.coord?.lat, route?.params?.itemData?.coord?.lon)
-    setSelectedCrop(null)
-    setSelectedDatePest(translate("Select_Date"))
-    setPestForecastData(null)
-    setRawDate("")
+    if (route?.params?.itemData?.enablePestForecast) {
+      console.log("aqqqwpwopo>>>", route?.params?.itemData?.enablePestForecast)
+      getDetailsDashBoardData(route?.params?.itemData?.coord?.lat, route?.params?.itemData?.coord?.lon)
+      setLatitude(route?.params?.itemData?.coord?.lat)
+      setLongitude(route?.params?.itemData?.coord?.lon)
+      getWeatherData(route?.params?.itemData?.coord?.lat, route?.params?.itemData?.coord?.lon)
+      setSelectedCrop(null)
+      setSelectedDatePest(translate("Select_Date"))
+      setPestForecastData(null)
+      setRawDate("")
+      setMapZoomingLevel(30)
+      setSelectedFilter(translate('PestForecast'))
+    } else if (route?.params?.itemData) {
+      getDetailsDashBoardData(route?.params?.itemData?.coord?.lat, route?.params?.itemData?.coord?.lon)
+      setLatitude(route?.params?.itemData?.coord?.lat)
+      setLongitude(route?.params?.itemData?.coord?.lon)
+      getWeatherData(route?.params?.itemData?.coord?.lat, route?.params?.itemData?.coord?.lon)
+      setSelectedCrop(null)
+      setSelectedDatePest(translate("Select_Date"))
+      setPestForecastData(null)
+      setRawDate("")
+      setMapZoomingLevel(30)
+    }
   }, [route?.params?.itemData])
 
-  const getDetailsDashBoardData = async (latitude, longitude) => {
 
+
+  const getDetailsDashBoardData = async (latitude, longitude) => {
     const url = MAP_MY_INDIA_URL;
     try {
       let urll = `${url}?lat=${latitude}&lng=${longitude}`
@@ -145,15 +175,7 @@ const WeatherScreen = ({ route }) => {
       "sowingDate": date,
       "state": cityDet?.state
     }
-
-    // need to change custom apis service formate
     const finalResponse = await ApiService.post(pestUrlInfo, payload)
-    // const response = await fetch(pestUrlInfo, {
-    //   method: "POST",
-    //   headers: headers,
-    //   body: JSON.stringify(payload),
-    // })
-    // const finalResponse = await response.json()
     if (isConnected) {
       try {
         if (finalResponse?.response?.pestForecast.length > 0) {
@@ -191,7 +213,6 @@ const WeatherScreen = ({ route }) => {
   }
 
   const getCropsList = async (latitude, longitude, state) => {
-
     if (isConnected) {
       try {
         setLoader(false)
@@ -227,28 +248,9 @@ const WeatherScreen = ({ route }) => {
   }
 
   const callLocationNavigation = async () => {
-    //  navigation.navigate('Location')
-    // if (isConnected) {
-    //   const hasPermission = await requestLocationPermission();
-    //   if (hasPermission) {
-    //     if (Platform.OS == "android") {
-    //       const isGpsEnabled = await checkIfGpsEnabled();
-    //       if (isGpsEnabled) {
-    //                 navigation.navigate('Location', { screeName: "WeatherScreen", address: cityDet, coordinates: { latitude, longitude } })
-    //       }
-    //       else {
-    //         fetchLocation()
-    //       }
-    //     }
-    //     else {
-
-    //       navigation.navigate('Location', { screeName: "WeatherScreen", address: cityDet, coordinates: { latitude, longitude } })
-    //     }
-    //   }
-    // } else {
-    //   SimpleToast.show(translate('no_internet_conneccted'));
-    // }
+    navigation.navigate('Location', { coordinates: { latitude: latitude, longitude: longitude, address: cityDet, screenName: "WeatherScreen", zoom: mapZoomingLevel } })
   }
+  console.log("checkingZoomongLevel=-=->", mapZoomingLevel)
 
   const closeDate = () => {
     setCalendarVisible(false)
@@ -279,7 +281,7 @@ const WeatherScreen = ({ route }) => {
   return (
     <SafeAreaView style={styles.weatherSafeAreaContainer}>
       <View style={styles.mainContainer}>
-        {Platform.OS === 'android' && <StatusBar backgroundColor={"#ED3237"} barStyle={"light-content"} />}
+        {Platform.OS === 'android' && <StatusBar backgroundColor={Colors.app_theme_color} barStyle={"light-content"} />}
         <View style={styles.mainHeadersContainer}>
           <View style={styles.mainSubHeadersContainer}>
             <TouchableOpacity style={styles.backButton} onPress={handleBackScreen}>
@@ -394,7 +396,7 @@ const WeatherScreen = ({ route }) => {
             setSelectedFilter(translate("Days_Forecast_15"))
             setSelectedWeather('')
           }} activeOpacity={0.5} style={[selectedFilter === translate("Days_Forecast_15") ? styles.tabTextcontainer : styles.tabTextcontainer1, { width: "25%", height: 30 }]}>
-            <Text style={[styles.tabText, { color: selectedFilter === translate("Days_Forecast_15") ? "#fff" : "#ED3237", }]}>{translate("Days_Forecast_15")}</Text>
+            <Text style={[styles.tabText, { color: selectedFilter === translate("Days_Forecast_15") ? "#fff" : Colors.app_theme_color, }]}>{translate("Days_Forecast_15")}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => {
@@ -404,7 +406,7 @@ const WeatherScreen = ({ route }) => {
             }
           }} activeOpacity={0.5} style={[
             selectedFilter === translate("Hourly") ? styles.tabTextcontainer : styles.tabTextcontainer1, { width: "25%", height: 30, marginHorizontal: 5 }]}>
-            <Text style={[styles.tabText, { color: selectedFilter === translate("Hourly") ? "#fff" : "#ED3237" }]}>3 {translate("Hourly")}</Text>
+            <Text style={[styles.tabText, { color: selectedFilter === translate("Hourly") ? "#fff" : Colors.app_theme_color }]}>3 {translate("Hourly")}</Text>
           </TouchableOpacity>
 
 
@@ -416,7 +418,7 @@ const WeatherScreen = ({ route }) => {
             }
           }} activeOpacity={0.5} style={[
             selectedFilter === translate('PestForecast') ? styles.tabTextcontainer : styles.tabTextcontainer1, { width: "25%", height: 30, }]}>
-            <Text style={[styles.tabText, { color: selectedFilter === translate('PestForecast') ? "#fff" : "#ED3237" }]}>{translate('PestForecast')}</Text>
+            <Text style={[styles.tabText, { color: selectedFilter === translate('PestForecast') ? "#fff" : Colors.app_theme_color }]}>{translate('PestForecast')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -552,7 +554,7 @@ const WeatherScreen = ({ route }) => {
                             setSelectedWeather(item)
                           }
                         }}
-                        style={[{ backgroundColor: "#ED3237", borderRadius: 5, padding: 5, alignItems: "center", justifyContent: "center", marginLeft: 10 }]}>
+                        style={[{ backgroundColor: Colors.app_theme_color, borderRadius: 5, padding: 5, alignItems: "center", justifyContent: "center", marginLeft: 10 }]}>
                         <Image style={[{ height: 10, width: 10, tintColor: "#fff" }]} resizeMode='contain' source={selectedWeather === item ? require('../../assets/Images/up_arrow.png') : require('../../assets/Images/down_arow.png')}></Image>
                       </TouchableOpacity>
                     </View>
@@ -708,7 +710,7 @@ const WeatherScreen = ({ route }) => {
                         <Text style={[styles.degreeText, { color: "#000", marginTop: 5 }]}>{"°c"}</Text>
                       </View>
                     </View>
-                    {selectedFilter !== translate("Days_Forecast_15") && <View style={[{ backgroundColor: "#ED3237", borderRadius: 5, padding: 5, alignItems: "center", justifyContent: "center" }]}>
+                    {selectedFilter !== translate("Days_Forecast_15") && <View style={[{ backgroundColor: Colors.app_theme_color, borderRadius: 5, padding: 5, alignItems: "center", justifyContent: "center" }]}>
                       <Image style={[{ height: 10, width: 10, tintColor: "#fff" }]} resizeMode='contain' source={selectedWeather === item ? require('../../assets/Images/up_arrow.png') : require('../../assets/Images/up_arrow.png')}></Image>
 
                     </View>}
@@ -727,7 +729,7 @@ const WeatherScreen = ({ route }) => {
                   borderRadius: 40, height: 25, width: 25, alignItems: "center", justifyContent: "center",
                   backgroundColor: "#000"
                 }}>
-                  <Image source={require("../../assets/Images/crossMark.png")} style={{ height: 10, width: 10, resizeMode: "contain", tintColor: "#fff" }} />
+                  <Image source={require("../../assets/Images/crossIcon.png")} style={{ height: 10, width: 10, resizeMode: "contain", tintColor: "#fff" }} />
                 </TouchableOpacity>
                 <Calendar
                   onDayPress={(day) => {
@@ -737,7 +739,7 @@ const WeatherScreen = ({ route }) => {
                     setCalendarVisible(false);
                   }}
                   markedDates={
-                    selectedDate ? { [selectedDate]: { selected: true, marked: true, selectedColor: "#ED3237" } } : {}
+                    selectedDate ? { [selectedDate]: { selected: true, marked: true, selectedColor: Colors.app_theme_color } } : {}
                   }
                 />
               </View>
@@ -757,7 +759,7 @@ const WeatherScreen = ({ route }) => {
             <View style={styles.modalSubParentContainer}>
               <View style={styles.closeBtnContainer}>
                 <TouchableOpacity onPress={() => setShowDropDowns(false)}>
-                  <Image source={require('../../assets/Images/crossMark.png')} style={styles.closeIcon} />
+                  <Image source={require('../../assets/Images/crossIcon.png')} style={styles.closeIcon} />
                 </TouchableOpacity>
               </View>
               {cropList?.length > 0 ? (
@@ -767,7 +769,7 @@ const WeatherScreen = ({ route }) => {
                   renderItem={({ item, index }) => (
                     <TouchableOpacity onPress={() => onPressDropdownItem(item)}>
                       <View style={styles.flatListRenderStyles}>
-                        <Text>{item.name}</Text>
+                        <Text style={{ color: "#000", fontSize: 14, lineHeight: 25 }}>{item.name}</Text>
                         {/* <Text style={[{color:selectedItem === item.name ?'#378CE7':"#000"} ,
                                             //  styles['text_input'],
                                              ]} numberOfLines={3}>

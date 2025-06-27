@@ -1,5 +1,5 @@
 import { Platform, Text, StatusBar, View, FlatList, StyleSheet, Image, TouchableOpacity, Alert, ScrollView, Dimensions } from 'react-native';
-import {useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import SimpleToast from 'react-native-simple-toast';
@@ -11,9 +11,9 @@ import CustomHeaders from '../../components/CustomeHeaders';
 import styles from './styles';
 import { isNullOrEmptyNOTTrim } from '../../Utility/Utils';
 
-const{height}=Dimensions.get("window")
+const { height } = Dimensions.get("window")
 const Remedyrecommendation = ({ route }) => {
-  console.log("routesChecking=-=-=>",route.params)
+  console.log("routesChecking=-=-=>", route.params)
   const [diseaseData, setDiseaseData] = useState(route?.params?.data || '')
   const [pests, setPests] = useState(route?.params?.data?.pests || '')
   const [description, setDescription] = useState(route?.params?.data?.description || '')
@@ -22,7 +22,7 @@ const Remedyrecommendation = ({ route }) => {
   const [diagnosis, setDiagnosis] = useState('');
   const [advisory, setAdvisory] = useState([]);
   const { isConnected } = useSelector(state => state.network);
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getRedemy();
@@ -62,12 +62,12 @@ const Remedyrecommendation = ({ route }) => {
           longitude: route.params.longitude.toString(),
         };
 
-        const finalResponse=await ApiService.post(getRemedyUrl,payload,headers, false)
-        if(finalResponse?.statusCode==200){
+        const finalResponse = await ApiService.post(getRemedyUrl, payload, headers, false)
+        if (finalResponse?.statusCode == 200) {
           setDiagnosis(finalResponse?.response[0]?.diagnosis);
           setAdvisory(finalResponse?.response[0]?.advisory);
 
-        }else{
+        } else {
           SimpleToast.show(!isNullOrEmptyNOTTrim(finalResponse?.message) ? finalResponse?.message : translate('Something_went_wrong'));
 
         }
@@ -81,7 +81,7 @@ const Remedyrecommendation = ({ route }) => {
     }
   };
 
-    const handleBackScreen=()=>{
+  const handleBackScreen = () => {
     navigation.goBack()
   }
 
@@ -104,16 +104,16 @@ const Remedyrecommendation = ({ route }) => {
             <Text style={styles.dignosisText}>{diagnosis}</Text>
             <View style={{ maxHeight: height * 0.55 }}>
               {
-              advisory?.length > 0 ? (
-              advisory?.map((item,index)=>{
-                return(
-                  <View style={styles.remedyPointsContainer}>
-                    <Text style={styles.remedyPintsText}>{index + 1} </Text>
-                    <Text style={styles.remedyPintsText}>{item?.point}</Text>
-                  </View>
-                )
-              })
-                
+                advisory?.length > 0 ? (
+                  advisory?.map((item, index) => {
+                    return (
+                      <View style={styles.remedyPointsContainer}>
+                        <Text style={styles.remedyPintsText}>{index + 1} </Text>
+                        <Text style={styles.remedyPintsText}>{item?.point}</Text>
+                      </View>
+                    )
+                  })
+
                   // <FlatList
                   //   data={advisory}
                   //   keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()}
@@ -128,12 +128,12 @@ const Remedyrecommendation = ({ route }) => {
                   //   maxToRenderPerBatch={10}
                   //   windowSize={5}
                   // />
-              ) 
-              
-              
-              : (
-                <Text style={styles.remedyNotAvailable}>{translate('not_available')}</Text>
-              )}
+                )
+
+
+                  : (
+                    <Text style={styles.remedyNotAvailable}>{translate('not_available')}</Text>
+                  )}
             </View>
 
           </View>

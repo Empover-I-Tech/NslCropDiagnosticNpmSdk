@@ -393,7 +393,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         marginTop: 0
     },
-    rangeText: { fontSize: responsiveFontSize(1.8), fontWeight: '400', color: '#00000099'},
+    rangeText: { fontSize: responsiveFontSize(1.8), fontWeight: '400', color: '#00000099' },
     iconContainer: {
         flexDirection: "row",
         alignItems: "center",
@@ -429,13 +429,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         paddingBottom: 15
     },
-    closeBtnContainer:{
-        alignSelf:"flex-end",
-        top:5
+    closeBtnContainer: {
+        alignSelf: "flex-end",
+        top: 5
     },
-        flatListStyle:{
-        width:"100%",
-        top:10
+    flatListStyle: {
+        width: "100%",
+        top: 10
     },
     lineDivider: {
         backgroundColor: "#D6D6D6",
@@ -455,68 +455,65 @@ const styles = StyleSheet.create({
         width: 15,
         tintColor: "#000"
     },
-    remedyMainContainer:{
-        flex: 1, 
-        backgroundColor: 'white', 
-        borderRadius: 10, 
-        margin: 10, 
-        width: "90%", 
-        alignSelf: "center", 
-        borderRadius: 10, 
-        shadowColor: '#000', 
-        backgroundColor: "white", 
-        shadowOffset: { width: 0, height: 2 }, 
-        shadowOpacity: 0.25, 
-        shadowRadius: 4, 
+    remedyMainContainer: {
+        flex: 1,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        margin: 10,
+        width: "90%",
+        alignSelf: "center",
+        borderRadius: 10,
+        shadowColor: '#000',
+        backgroundColor: "white",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
         elevation: 2
     },
-    remedySubContainer:{
-        margin: 10, 
-        flexDirection: "row", 
-        alignItems: "center", 
+    remedySubContainer: {
+        margin: 10,
+        flexDirection: "row",
+        alignItems: "center",
         justifyContent: "space-between"
     },
-    remedyNameText:{
-        color:"#000", 
-        fontWeight: '900', 
-        fontSize: 14, 
+    remedyNameText: {
+        color: "#000",
+        fontWeight: '900',
+        fontSize: 14,
         lineHeight: 30
     },
-    remedyDescription:{
-        color:"#000", 
-        fontSize: 14, 
+    remedyDescription: {
+        color: "#000",
+        fontSize: 14,
         lineHeight: 25
     },
-    divider:{
-      height: 2, 
-      backgroundColor: 'rgba(242, 246, 249, 1)', 
-      marginVertical: 7, 
-      margin: 10    
+    divider: {
+        height: 2,
+        backgroundColor: 'rgba(242, 246, 249, 1)',
+        marginVertical: 7,
+        margin: 10
     },
-    dignosisText:{
-        color:"#000", 
-        fontSize: 14, 
+    dignosisText: {
+        color: "#000",
+        fontSize: 14,
         marginBottom: 10
     },
-    remedyPointsContainer:{
-        flexDirection: 'row', 
-        width: "95%" 
+    remedyPointsContainer: {
+        flexDirection: 'row',
+        width: "95%"
     },
-    remedyPintsText:{
-        color:"#000", 
-        fontSize: 14, 
+    remedyPintsText: {
+        color: "#000",
+        fontSize: 14,
         lineHeight: 26
     },
-    remedyNotAvailable:{
-        color:"#000", 
-        marginLeft: 10, 
-        margin: 2, 
-        fontWeight: '400', 
-        fontSize: 13 
+    remedyNotAvailable: {
+        color: "#000",
+        marginLeft: 10,
+        margin: 2,
+        fontWeight: '400',
+        fontSize: 13
     }
-  
-
-
 })
 
 export default styles
