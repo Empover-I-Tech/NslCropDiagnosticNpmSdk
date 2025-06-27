@@ -26,14 +26,8 @@ export var STATUS_CODE_601 = 601;
 export const MAP_MY_INDIA_KEY = "5zf2txekry89tciw19sgmjpo7w133ioj";
 export const MAP_MY_INDIA_URL = `https://apis.mapmyindia.com/advancedmaps/v1/${MAP_MY_INDIA_KEY}/rev_geocode`
 export default configs = {
-    BASE_URL: APP_ENV_PROD ? 'http://3.110.159.82:8080/beejkisan/rest/' : 'http://3.110.159.82:8080/beejkisan/rest/',
     BASE_URL_NVM:APP_ENV_PROD?'https://nvmretailpro.com:8443/rest/nsl/':'http://3.110.159.82:8080/vyapar_mitra/rest/nsl/',
-    LOGIN: {
-        SENDOTP: 'login/sendOTP',
-        VALIDATEOTP: 'validateOTP',
-    },
-
-    
+  
     CROPDIAGNOSTICS:{
         CROPDISEASEIDENTIFICATIONHISTORY:"CropDiseaseIdentificationHistory",
         CROPDISEASEIDENTIFICATION : 'processCropDiseaseIdentification',
@@ -44,6 +38,4 @@ export default configs = {
         getPestInformation:"getPestInformation",
         getRemedies:"processCropDiseaseRemedy",
     }
-
-
 }

@@ -19,7 +19,16 @@ const LoaderScreen = ({ route }) => {
             dispatch(setUserMenuControl(finalJSON?.userMenuControl));
             dispatch(setUserProfile(finalJSON?.userProfile));
 
-            navigation.replace(finalJSON.classType)
+            if (finalJSON.classType === "WeatherScreen") {
+                navigation.replace(finalJSON.classType, {
+                    itemData: finalJSON.itemData,
+                });
+            } else {
+                navigation.replace(finalJSON.classType);
+            }
+
+
+
 
         };
 

@@ -269,9 +269,12 @@ const WeatherScreen = ({ route }) => {
   }
 
   const handleBackScreen = () => {
-    // navigation.goBack()
-    navigation.navigate("HomeScreen")
-  }
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      navigation.navigate("HomeScreen");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.weatherSafeAreaContainer}>

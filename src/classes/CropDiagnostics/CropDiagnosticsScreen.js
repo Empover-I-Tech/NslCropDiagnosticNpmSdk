@@ -199,7 +199,7 @@ const CropDiagnosticsScreen = ({ route }) => {
         }
         formData.append('jsonData', JSON.stringify(jsonData));
         console.log("FormData:", JSON.stringify(formData));
-        const finalResponse = await ApiService.post(cropDiseaseNotificationUrl, formData, null,true)
+        const finalResponse = await ApiService.post(cropDiseaseNotificationUrl, formData, null, true)
         console.log("finalResponse", JSON.stringify(finalResponse))
         if (finalResponse.statusCode === STATUS_CODE_SUCCESS_200) {
           const dashboardRespBYPASS = finalResponse.response
@@ -295,10 +295,15 @@ const CropDiagnosticsScreen = ({ route }) => {
     )
   }
 
+
+
   const handleBackScreen = () => {
-    // navigation.goBack()
-    navigation.navigate("HomeScreen")
-  }
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      navigation.navigate("HomeScreen");
+    }
+  };
 
   return (
     <>
