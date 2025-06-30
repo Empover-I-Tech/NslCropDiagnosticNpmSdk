@@ -100,6 +100,8 @@ const CropDiagnosticsScreen = ({ route }) => {
         }, 1000);
       }
     } else {
+      setLoading(false)
+      setCropLoading(false);
       SimpleToast.show(translate('no_internet_conneccted'))
     }
   }

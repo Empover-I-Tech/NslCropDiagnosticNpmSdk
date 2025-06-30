@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { STATUS_CODE_103, STATUS_CODE_601, STATUS_CODE_SUCCESS_200 } from './ApiConfig';
-import { APPLICATIONNAME, COMPANYCODE, FCMTOKEN, getFromAsyncStorage, isNullOrEmptyNOTTrim, LANGUAGEID, MOBILENUMBER, REFERRALCODE, ROLEID, USER_ID, USERNAME, VERSIONCODE, VERSIONNAME } from '../Utility/Utils';
+import { APPLICATIONNAME, COMPANYCODE, FCMTOKEN, getFromAsyncStorage, isNullOrEmptyNOTTrim, LANGUAGEID, MOBILENUMBER, REFERRALCODE, ROLEID, SDKAUTHENTICATIONKEY, USER_ID, USERNAME, VERSIONCODE, VERSIONNAME } from '../Utility/Utils';
 
 // Replace these with actual utility functions or constants
 async function getDeviceId() {
@@ -45,8 +45,9 @@ class ApiService {
     const roleId = await getFromAsyncStorage(ROLEID)
     const username = await getFromAsyncStorage(USERNAME)
     const referralCode = await getFromAsyncStorage(REFERRALCODE)
+    const sdkAuthenticationKey = await getFromAsyncStorage(SDKAUTHENTICATIONKEY)
     console.log("selectedLanguageId", selectedLanguageId)
-     console.log("formData", formData)
+    console.log("formData", formData)
     return {
       "Accept": "application/json",
       "Content-Type": formData ? "multipart/form-data" : 'application/json',
@@ -64,6 +65,7 @@ class ApiService {
       referralCode: referralCode,
       roleId: roleId,
       userName: username,
+      sdkAuthenticationKey: sdkAuthenticationKey || "",
       authType: "JSONREQUEST",
       ...extraHeaders,
     };
