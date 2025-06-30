@@ -4,7 +4,6 @@ import { translate } from '../../Localization/Localisation';
 import React, { useEffect, useState } from 'react';
 import styles from './styles';
 import CustomButton from '../../components/CustomButton'
-import { Colors } from '../../colors/Colors';
 import ImagePicker from 'react-native-image-crop-picker';
 import CustomLoader from '../../components/CustomLoader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,8 +17,10 @@ import ApiConfig, { STATUS_CODE_SUCCESS_200 } from '../../Networks/ApiConfig';
 import ApiService from '../../Networks/ApiService';
 import { isNullOrEmptyNOTTrim } from '../../Utility/Utils';
 import CustomDiagnosticsLoader from '../../components/cropDiagnosisLoader';
+import { useColors } from '../../colors/Colors';
 
 const CropDiagnosticsScreen = ({ route }) => {
+  const Colors=useColors()
   const [loading, setLoading] = useState(false)
   const [cropLoading, setCropLoading] = useState(false)
   const [selectedFilter, setSelectedFilter] = useState(translate('Crop_Diagnostic'));
@@ -276,8 +277,8 @@ const CropDiagnosticsScreen = ({ route }) => {
       <View style={styles.cropDiagnosticsHistoryListContainer}>
         <View style={styles.cropDiagnosticsHistoryListSubContainer}>
           <View style={styles.diseasesDetectedContainer}>
-            <Image tintColor={"#ED3237"} source={require('../../assets/Images/diseaseDetected.png')} style={styles.diseaseDetectedIcon} />
-            <Text style={styles.diseasesDetectedTitle}>{item.cropDiseaseTitle != undefined ? item.cropDiseaseTitle : translate('No_Disease_Detected')}</Text>
+            <Image tintColor={Colors.app_theme_color} source={require('../../assets/Images/diseaseDetected.png')} style={styles.diseaseDetectedIcon} />
+            <Text style={[styles.diseasesDetectedTitle,{color:Colors.app_theme_color}]}>{item.cropDiseaseTitle != undefined ? item.cropDiseaseTitle : translate('No_Disease_Detected')}</Text>
           </View>
           <View style={styles.diseasesDetectedDetailsContainer}>
             <View style={styles.diseasesDetectedDetailsSubContainer}>
@@ -289,8 +290,8 @@ const CropDiagnosticsScreen = ({ route }) => {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={styles.diseasesDetectedViewBtnContainer} onPress={() => navigation.navigate("CropDesiesDetection", { data: item })}>
-            <Text style={styles.viewDetailsText}>{translate("View_Details")}</Text>
+          <TouchableOpacity style={[styles.diseasesDetectedViewBtnContainer,{borderColor:Colors.app_theme_color,}]} onPress={() => navigation.navigate("CropDesiesDetection", { data: item })}>
+            <Text style={{color:Colors.app_theme_color,fontSize:14,lineHeight:25}}>{translate("View_Details")}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -311,13 +312,13 @@ const CropDiagnosticsScreen = ({ route }) => {
     <>
       <CustomHeaders backBtnHandle={handleBackScreen} headersTitle={translate("Crop_Diagnostic_Tool")} />
       <View style={styles.tabsContainer}>
-        <TouchableOpacity activeOpacity={0.5} onPress={() => setSelectedFilter(translate('Crop_Diagnostic'))} style={[selectedFilter === translate('Crop_Diagnostic') && { backgroundColor: "#ED3237" }, styles.tabSubContainer]}>
-          <Text style={[{ color: selectedFilter === translate('Crop_Diagnostic') ? "#fff" : "#000" }, styles.tabText]}>{translate('Crop_Diagnostic')}</Text>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => setSelectedFilter(translate('Crop_Diagnostic'))} style={[selectedFilter === translate('Crop_Diagnostic') && { backgroundColor: Colors.app_theme_color }, styles.tabSubContainer]}>
+          <Text style={[{ color: selectedFilter === translate('Crop_Diagnostic') ? Colors.secondaryColor : Colors.black_color }, styles.tabText]}>{translate('Crop_Diagnostic')}</Text>
         </TouchableOpacity>
         <TouchableOpacity activeOpacity={0.5} onPress={() => {
           setSelectedFilter(translate('history'));
-        }} style={[selectedFilter === translate('history') && { backgroundColor: "#ED3237" }, styles.tabSubContainer]}>
-          <Text style={[{ color: selectedFilter === translate('history') ? "#fff" : "#000" }, styles.tabText]}>{translate('history')}</Text>
+        }} style={[selectedFilter === translate('history') && { backgroundColor: Colors.app_theme_color }, styles.tabSubContainer]}>
+          <Text style={[{ color: selectedFilter === translate('history') ? Colors.secondaryColor : Colors.black_color }, styles.tabText]}>{translate('history')}</Text>
         </TouchableOpacity>
       </View>
       {
@@ -374,38 +375,62 @@ const CropDiagnosticsScreen = ({ route }) => {
                           openImagePickerProfilePic()
                         }
                         else { openCameraProfilePic() }
-                      }} style={[styles.button, styles.clearButton, { borderColor: "#ED3237" }]}>
-                        <Text style={[styles.buttonText, { color: "#ED3237" }]}>{fromGallery ? translate("ReSelect") : translate('Re-Take')}</Text>
+                      }} style={[styles.button, { borderColor:Colors.app_theme_color,backgroundColor:Colors.secondaryColor }]}>
+                        <Text style={[styles.buttonText, { color: Colors.app_theme_color }]}>{fromGallery ? translate("ReSelect") : translate('Re-Take')}</Text>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => {
                         submitCrop()
                         setCameraRelatedPopUp(false)
-                      }} style={[styles.button, { borderColor: "#ED3237", backgroundColor: "#ED3237", }]}>
-                        <Text style={[styles.buttonText, { color: "#fff" }]}>{translate('proceed')}</Text>
+                      }} style={[styles.button, { borderColor: Colors.app_theme_color, backgroundColor: Colors.app_theme_color, }]}>
+                        <Text style={[styles.buttonText, { color:Colors.secondaryColor }]}>{translate('proceed')}</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
                   :
                   <View style={[styles.subContainer]}>
                     <TouchableOpacity onPress={() => { storeData(true) }} style={styles.dontShowAgainBtnContainer}>
-                      <Text style={styles.dontShowAgainText}>{translate('Dont_show_this_again')}</Text>
+                      <Text style={[styles.dontShowAgainText,{color:Colors.app_theme_color}]}>{translate('Dont_show_this_again')}</Text>
                     </TouchableOpacity>
                     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                       <Image style={styles.cameraPopupIcon} source={require('../../assets/Images/cameraPopup.png')} />
-                      <Text style={styles.carouselNameText}>{CarouselDATA[carouselIndex].name}</Text>
+                      <Text style={[styles.carouselNameText,{color:Colors.app_theme_color}]}>{CarouselDATA[carouselIndex].name}</Text>
                       <Text style={styles.carouselDesText}>{CarouselDATA[carouselIndex].desc}</Text>
 
                       <View style={styles.lineDividerContainer}>
-                        <View style={[carouselIndex === 0 ? styles.lineDividerOne : styles.lineDividerOneCopy]} />
-                        <View style={[carouselIndex === 1 ? styles.lineDividerTwo : styles.lineDividerTwoCopy]} />
+                          <View style={[carouselIndex === 0 ? {
+                            height: 10,
+                            width: 10,
+                            backgroundColor: Colors.app_theme_color,
+                            borderRadius: 60,
+                            marginRight: 2.5
+                          } : {
+                            height: 10,
+                            width: 10,
+                            borderColor: Colors.app_theme_color,
+                            borderRadius: 60,
+                            borderWidth: 1,
+                            marginRight: 2.5
+                          }]} />
+                          <View style={[carouselIndex === 1 ? {
+                            height: 10,
+                            width: 10,
+                            backgroundColor:Colors.app_theme_color,
+                            borderRadius: 60
+                          } : {
+                            height: 10,
+                            width: 10,
+                            borderColor:Colors.app_theme_color,
+                            borderRadius: 60,
+                            borderWidth: 1
+                          }]} />
                       </View>
                     </View>
                     <View style={styles.container}>
                       <TouchableOpacity onPress={() => {
                         setCarouselIndex(1)
                         openCameraProfilePic()
-                      }} style={[styles.button, styles.clearButton, { borderColor: "#ED3237" }]}>
-                        <Text style={[styles.buttonText, { color: "#ED3237" }]}>{translate('skip')}</Text>
+                      }} style={[styles.button,{ borderColor: Colors.app_theme_color,backgroundColor:Colors.secondaryColor }]}>
+                        <Text style={[styles.buttonText, { color: Colors.app_theme_color }]}>{translate('skip')}</Text>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => {
                         if (carouselIndex === 0) {
@@ -413,8 +438,8 @@ const CropDiagnosticsScreen = ({ route }) => {
                         } else {
                           openCameraProfilePic()
                         }
-                      }} style={[styles.button, { borderColor: "#ED3237", backgroundColor: "#ED3237", }]}>
-                        <Text style={[styles.buttonText, { color: "#fff" }]}>{translate('Next')}</Text>
+                      }} style={[styles.button, { borderColor: Colors.app_theme_color, backgroundColor: Colors.app_theme_color, }]}>
+                        <Text style={[styles.buttonText, { color:Colors.secondaryColor }]}>{translate('Next')}</Text>
                       </TouchableOpacity>
                     </View>
                   </View>

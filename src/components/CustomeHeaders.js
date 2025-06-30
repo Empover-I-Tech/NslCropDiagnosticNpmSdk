@@ -2,8 +2,10 @@ import { View, Text,StyleSheet,SafeAreaView,Image,Dimensions, TouchableOpacity,S
 const {height,width}=Dimensions.get("window")
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import {useColors} from '../colors/Colors'
 
 const CustomHeaders=({headersTitle,backBtnHandle})=>{
+    const Colors=useColors()
     const navigation=useNavigation()
     const handleBack = () => {
         if (backBtnHandle) {
@@ -13,14 +15,14 @@ const CustomHeaders=({headersTitle,backBtnHandle})=>{
         }
     };
     return(
-        <View style={styles.headersContainer}>
-            {Platform.OS==="android"&&<StatusBar backgroundColor={"#ED3237"}/>}
+        <View style={[styles.headersContainer,{backgroundColor:Colors.app_theme_color,}]}>
+            {Platform.OS==="android"&&<StatusBar backgroundColor={Colors.app_theme_color}/>}
             <SafeAreaView>
                 <View style={styles.headersSubContainer}>
                     <TouchableOpacity onPress={()=>backBtnHandle()}>
                         <Image source={require("../assets/Images/ScreenBackIcon.png")} style={styles.backIcon} />
                     </TouchableOpacity>
-                    <Text style={styles.headersTitleText}>{headersTitle}</Text>
+                    <Text style={[styles.headersTitleText,{color:Colors.secondaryColor}]}>{headersTitle}</Text>
                     <View style={styles.dummyContainer} />
                 </View>
             </SafeAreaView>
@@ -32,7 +34,6 @@ const CustomHeaders=({headersTitle,backBtnHandle})=>{
 
 const styles=StyleSheet.create({
     headersContainer:{
-        backgroundColor:"#ED3237",
         width:"100%",
         paddingHorizontal:10,
         height:"12.5%",
@@ -45,7 +46,6 @@ const styles=StyleSheet.create({
         width:"100%",
     },
     headersTitleText:{
-        color:"#fff",
         fontWeight:"500",
         fontSize:17,
         lineHeight:25

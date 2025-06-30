@@ -1,4 +1,4 @@
-import { Text, View, ScrollView, Dimensions } from 'react-native';
+import { Platform, Text, StatusBar, View, FlatList, StyleSheet, Image, TouchableOpacity, Alert, ScrollView, Dimensions } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -50,9 +50,9 @@ const Remedyrecommendation = ({ route }) => {
 
         } else {
           SimpleToast.show(!isNullOrEmptyNOTTrim(finalResponse?.message) ? finalResponse?.message : translate('Something_went_wrong'));
-        }
 
-        setTimeout(() => {
+        }
+         setTimeout(() => {
           setLoading(false);
         }, 1000);
       } catch (error) {
@@ -61,11 +61,10 @@ const Remedyrecommendation = ({ route }) => {
           setLoading(false);
         }, 1000);
       }
-    }
-    else {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
+    } else {
+       setTimeout(() => {
+          setLoading(false);
+        }, 1000);
     }
   };
 

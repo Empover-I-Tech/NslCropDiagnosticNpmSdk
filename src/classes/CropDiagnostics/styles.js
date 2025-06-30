@@ -1,9 +1,10 @@
 import { StyleSheet,Dimensions } from "react-native";
+import { Colors } from "../../colors/Colors";
 const {height,width}=Dimensions.get("window")
 
 const styles=StyleSheet.create({
     tabsContainer:{
-        backgroundColor: "#ED32370F", 
+        backgroundColor:Colors.Crimson_Red, 
         height: 45, 
         width:"90%", 
         alignSelf: "center", 
@@ -31,7 +32,7 @@ const styles=StyleSheet.create({
     },
     eachCropDiagnosticsItemContainer:{
         width: "90%", 
-        backgroundColor: "white", 
+        backgroundColor:Colors.white_color, 
         marginVertical: 10, 
         alignSelf: "center", 
         elevation: 1, 
@@ -61,7 +62,7 @@ const styles=StyleSheet.create({
     noDataText: {
         fontWeight: "500",
         fontSize: 16,
-        color: "#ED3237"
+        color:Colors.black_color
     },
     listFooterContainer:{
         marginTop: 3,
@@ -69,7 +70,7 @@ const styles=StyleSheet.create({
     },
     overallContainer: {
         flex: 1,
-        backgroundColor: "rgba(52, 52, 52, 0.8)",
+        backgroundColor:Colors.transparent,
         alignItems: "center",
         justifyContent: "center"
     },
@@ -77,11 +78,11 @@ const styles=StyleSheet.create({
         height:"80%",
         width: "90%",
         alignSelf: "center",
-        backgroundColor: "#fff",
+        backgroundColor:Colors.white_color,
         paddingBottom: 15,
         borderRadius: 20,
         elevation: 5,
-        shadowColor: "#000",
+        shadowColor:Colors.black_color,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
@@ -111,9 +112,6 @@ const styles=StyleSheet.create({
         borderWidth: 1,
         bottom: 10
     },
-    clearButton: {
-        backgroundColor: 'rgba(255, 255, 255, 1)',
-    },
     buttonText: {
         fontSize: 14,
         fontWeight: '400',
@@ -124,7 +122,6 @@ const styles=StyleSheet.create({
         top: 20
     },
     dontShowAgainText:{
-        color:"#ED3237", 
         fontSize: 12,
         fontWeight:"500"
     },
@@ -136,14 +133,13 @@ const styles=StyleSheet.create({
          marginTop:10 
     },
     carouselNameText:{
-        color: "#ED3237", 
         fontSize: 13, 
         alignSelf: "center", 
         marginTop: 5,
         lineHeight:25
     },
     carouselDesText:{
-       color: "#000", // dynamicstyle
+       color:Colors.black_color, // dynamicstyle
        fontSize: 11, 
        alignSelf: "center", 
        textAlign: "center", 
@@ -157,41 +153,13 @@ const styles=StyleSheet.create({
         alignItems: "center",
         marginVertical:20
     },
-    lineDividerOne:{
-        height: 10, 
-        width: 10, 
-        backgroundColor: "#ED3237", 
-        borderRadius: 60, 
-        marginRight: 2.5
-    },
-    lineDividerOneCopy: {
-        height: 10, 
-        width: 10, 
-        borderColor: "#ED3237", 
-        borderRadius: 60, 
-        borderWidth: 1, 
-        marginRight: 2.5
-    },
-    lineDividerTwo:{
-        height: 10, 
-        width: 10, 
-        backgroundColor: "#ED3237", 
-        borderRadius: 60 
-    },
-    lineDividerTwoCopy: {
-         height: 10, 
-         width: 10, 
-         borderColor: "#ED3237", 
-         borderRadius: 60, 
-         borderWidth: 1 
-    },
     noDataAvaiableHistoryContainer:{
         alignSelf: 'center', 
         justifyContent: 'center', 
         flex: 1
     },
     noDataAvailableHistoryText:{
-        color: 'red', 
+        color:Colors.black_color, 
         marginLeft: 10, 
         fontFamily: "Poppins-SemiBold", 
         fontWeight: '500', 
@@ -199,7 +167,7 @@ const styles=StyleSheet.create({
     },
     cropDiagnosticsHistoryListContainer: {
         width: "90%",
-        backgroundColor: "white",
+        backgroundColor: Colors.white_color,
         marginVertical: 10,
         alignSelf: "center",
         elevation: 1,
@@ -209,13 +177,13 @@ const styles=StyleSheet.create({
     cropDiagnosticsHistoryListSubContainer: {
          flex: 1, 
          borderWidth: 2, 
-         borderColor: "rgba(0, 0, 0, 0.05)", 
+         borderColor: Colors.lightgrey, 
          borderRadius: 10 
     },
     diseasesDetectedContainer:{
         flexDirection: "row", 
         alignItems: "center", 
-        backgroundColor: "#FFF1F1", 
+        backgroundColor: Colors.Crimson_Red, 
         height: 35, 
         paddingHorizontal: 10
     },
@@ -225,7 +193,6 @@ const styles=StyleSheet.create({
         resizeMode: "contain"
     },
     diseasesDetectedTitle:{
-        color:"#ED3237", 
         marginLeft: 10, 
     },
     diseasesDetectedDetailsContainer:{
@@ -244,17 +211,17 @@ const styles=StyleSheet.create({
         resizeMode: "contain", 
     },
     diseasesDetectedDiseasesName: {
-        color:"#000",
+        color:Colors.black_color,
         marginLeft: 10,
         fontSize: 12
     },
     diseasesCropName: {
-        color: "#000",
+        color:Colors.black_color,
         marginLeft: 10,
         fontSize: 10
     },
     diseasesDetectedCreatedOnText: {
-        color: 'rgba(85, 85, 85, 1)',
+        color:Colors.lighy_black,
         marginLeft: 10,
         fontSize: 10
     },
@@ -265,14 +232,10 @@ const styles=StyleSheet.create({
          padding: 8, 
          margin: 8, 
          borderWidth: 1, 
-         borderColor:"#ED3237", 
          borderRadius: 5 
     },
-    viewDetailsText:{
-        color:"#ED3237"
-    },
     cropDiseasesDetection:{
-        backgroundColor: "rgba(242, 246, 249, 1)", 
+        backgroundColor:Colors.white_rgba ,
         flex: 1 
     },
     detectImage:{
@@ -283,7 +246,7 @@ const styles=StyleSheet.create({
         resizeMode: 'cover' 
     },
     detectSubCard:{
-        backgroundColor: "#fff", 
+        backgroundColor:Colors.white_color, 
         width: "90%", 
         alignSelf: "center", 
         marginTop: 20, 
@@ -297,20 +260,20 @@ const styles=StyleSheet.create({
     diseaseNameText:{
         fontSize: 14,  
         fontWeight: "bold",
-        color: "grey",
+        color:Colors.lightish_grey,
     },
     diseaseName:{
-         color:"#000", 
+         color:Colors.black_color, 
          fontFamily: "Inter-Bold", 
          fontWeight: '900', 
          fontSize: 14 
     },
     whatsappIconContainer: {
-        borderColor: '#0CB500',
+        borderColor: Colors.green,
         borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#0CB500',
+        backgroundColor:Colors.green,
         width: 40,
         height: 40,
         borderRadius: 20,
@@ -322,12 +285,12 @@ const styles=StyleSheet.create({
     },
     dividerLine:{
         height: 2, 
-        backgroundColor: 'rgba(242, 246, 249, 1)', 
+        backgroundColor:Colors.white_rgba, 
         marginVertical: 7,
         margin: 10 
     },
     mostPossibleDiagnosisText: {
-        color:"#000",
+        color:Colors.black_color,
         marginLeft: 10,
         fontWeight: '500',
         fontSize:14,
@@ -338,7 +301,7 @@ const styles=StyleSheet.create({
         width: '90%'
     },
     diagnosisText:{
-        color:"#000", 
+        color:Colors.black_color, 
         marginLeft: 10, 
         margin: 2, 
         fontWeight: '400', 
@@ -354,12 +317,12 @@ const styles=StyleSheet.create({
         flexDirection: 'row' 
     },
     diagnosisPointText:{
-        color:"#000", 
+        color:Colors.black_color, 
         fontSize:14, 
         lineHeight: 25
     },
     noDataAvailableToolsText:{
-        color:"#000", 
+        color:Colors.black_color, 
         marginLeft: 10, 
         margin: 2, 
         fontWeight: '400', 
