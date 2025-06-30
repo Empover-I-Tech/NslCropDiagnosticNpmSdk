@@ -49,5 +49,8 @@
   "new_village": "Village",
   "Crop": "Crop",
   "select": "Select",
-  "remedy_recommendation": "Remedy recommendation"
+  "remedy_recommendation": "Remedy recommendation",
+  "UploadImage": "Upload Image",
+  "camera": "Camera",
+  "gallery": "Gallery"
 }

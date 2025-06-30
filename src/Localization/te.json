@@ -49,5 +49,8 @@
   "Crop": "పంట",
   "select": "ఎంచుకోండి",
   "Please_Select_Crop": "దయచేసి పంటను ఎంచుకోండి",
-  "remedy_recommendation": "చికిత్స సిఫార్సు"
+  "remedy_recommendation": "చికిత్స సిఫార్సు",
+  "UploadImage": "చిత్రాన్ని అప్‌లోడ్ చేయండి",
+  "camera": "కెమెరా",
+  "gallery": "గ్యాలరీ"
 }

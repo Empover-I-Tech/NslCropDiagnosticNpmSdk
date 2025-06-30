@@ -49,5 +49,8 @@
   "Crop": "फसल",
   "select": "चुनना",
   "Please_Select_Crop": "कृपया फसल चुनें",
-  "remedy_recommendation": "उपचार की सिफारिश"
+  "remedy_recommendation": "उपचार की सिफारिश",
+  "UploadImage": "छवि अपलोड करें",
+  "camera": "कैमरा",
+  "gallery": "गैलरी"
 }
