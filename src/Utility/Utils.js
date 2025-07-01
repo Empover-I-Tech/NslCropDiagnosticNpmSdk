@@ -32,6 +32,7 @@ export const FCMTOKEN = "FCMTOKEN"
 export const ROLEID = "ROLEID"
 export const REFFERALCODE = "REFFERALCODE"
 export const SDKAUTHENTICATIONKEY="SDKAUTHENTICATIONKEY";
+export const APPENVPROD = "APPENVPROD"
 
 
 export async function getSystemVersion() {

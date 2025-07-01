@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { APPLICATIONNAME, FCMTOKEN, LANGUAGEID, MOBILENUMBER, REFERRALCODE, ROLEID, SDKAUTHENTICATIONKEY, storeInAsyncStorage, USER_ID, USERNAME, VERSIONCODE, VERSIONNAME } from './Utils';
+import { APPENVPROD, APPLICATIONNAME, FCMTOKEN, LANGUAGEID, MOBILENUMBER, REFERRALCODE, ROLEID, SDKAUTHENTICATIONKEY, storeInAsyncStorage, USER_ID, USERNAME, VERSIONCODE, VERSIONNAME } from './Utils';
 
 let appContext = {}; // shared memory
 
@@ -20,6 +20,7 @@ export const initAppContext = async (params = {}) => {
         companyDetails,
         userMenuControl,
         userProfile,
+        appEnvProd
     } = params;
 
     // Persist only what you need across sessions
@@ -35,6 +36,7 @@ export const initAppContext = async (params = {}) => {
         [ROLEID, JSON.stringify(roleId)],
         [USERNAME, JSON.stringify(userName)],
         [REFERRALCODE, JSON.stringify(referralCode)],
+        [APPENVPROD, JSON.stringify(appEnvProd)]
     ]);
     // In-memory shared context
     appContext = {

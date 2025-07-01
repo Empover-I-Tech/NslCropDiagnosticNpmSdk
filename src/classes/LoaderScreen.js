@@ -27,9 +27,6 @@ const LoaderScreen = ({ route }) => {
                 navigation.replace(finalJSON.classType);
             }
 
-
-
-
         };
 
         init();
