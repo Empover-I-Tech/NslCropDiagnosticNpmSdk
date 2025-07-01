@@ -29,6 +29,7 @@ export const loadAppConfig = async () => {
     try {
         const storedValue = await getFromAsyncStorage(APPENVPROD);
         appEnvProd = JSON.parse(storedValue); // converts "true" => true
+        configs.BASE_URL_NVM = appEnvProd ? 'https://nvmretailpro.com:8443/rest/nsl/' : 'http://3.110.159.82:8080/vyapar_mitra/rest/nsl/'
     } catch (e) {
         appEnvProd = false; // fallback default
     }
@@ -38,7 +39,7 @@ export const MAP_MY_INDIA_KEY = "5zf2txekry89tciw19sgmjpo7w133ioj";
 export const MAP_MY_INDIA_URL = `https://apis.mapmyindia.com/advancedmaps/v1/${MAP_MY_INDIA_KEY}/rev_geocode`
 export default configs = {
 
-    BASE_URL_NVM: appEnvProd ? 'https://nvmretailpro.com:8443/rest/nsl/' : 'http://3.110.159.82:8080/vyapar_mitra/rest/nsl/',
+    BASE_URL_NVM: 'http://3.110.159.82:8080/vyapar_mitra/rest/nsl/',
 
     CROPDIAGNOSTICS: {
         CROPDISEASEIDENTIFICATIONHISTORY: "CropDiseaseIdentificationHistory",
