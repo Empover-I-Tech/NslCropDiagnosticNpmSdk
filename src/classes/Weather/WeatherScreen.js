@@ -11,14 +11,14 @@ import CustomLoader from '../../components/CustomLoader';
 import CustomCircularProgress from '../../components/CustomCircularProgress';
 import moment from 'moment';
 import { Calendar } from 'react-native-calendars';
-import ApiConfig, { MAP_MY_INDIA_URL, STATUS_CODE_103, STATUS_CODE_SUCCESS_200 } from '../../Networks/ApiConfig';
+import { CONFIG_KEYS, configs_nvm, MAP_MY_INDIA_URL, STATUS_CODE_SUCCESS_200 } from '../../Networks/ApiConfig';
 import ApiService from '../../Networks/ApiService';
 import { getFromAsyncStorage, isNullOrEmptyNOTTrim, MOBILENUMBER, USER_ID } from '../../Utility/Utils';
-import {useColors } from '../../colors/Colors';
+import { useColors } from '../../colors/Colors';
 
 
 const WeatherScreen = ({ route }) => {
-  const Colors=useColors()
+  const Colors = useColors()
   const navigation = useNavigation()
   const [loader, setLoader] = useState(false)
   const FILTERS = [translate("Days_Forecast_15"), translate("Hourly")]
@@ -121,7 +121,7 @@ const WeatherScreen = ({ route }) => {
   }
 
   const getWeatherData = async (newLat, newLong) => {
-    const url = ApiConfig.BASE_URL_NVM + ApiConfig.WEATHERDETAILS.nslgetWeatherDetailsV1
+    const url = configs_nvm.BASE_URL_NVM + CONFIG_KEYS.WEATHERDETAILS.nslgetWeatherDetailsV1
     if (isConnected) {
       const body = {
         latitude: newLat,
@@ -167,7 +167,7 @@ const WeatherScreen = ({ route }) => {
 
   const getDiseasesFromMap = async (date) => {
     setLoader(true)
-    const pestUrlInfo = ApiConfig.BASE_URL_NVM + ApiConfig.WEATHERDETAILS.getPestInformation
+    const pestUrlInfo = configs_nvm.BASE_URL_NVM + CONFIG_KEYS.WEATHERDETAILS.getPestInformation
     const payload = {
       "latitude": latitude,
       "longitude": longitude,
@@ -216,7 +216,7 @@ const WeatherScreen = ({ route }) => {
     if (isConnected) {
       try {
         setLoader(false)
-        var url = ApiConfig.BASE_URL_NVM + ApiConfig.WEATHERDETAILS.getPestForecastCrops
+        var url = configs_nvm.BASE_URL_NVM + CONFIG_KEYS.WEATHERDETAILS.getPestForecastCrops
         const payload = { "latitude": latitude, "longitude": longitude, "state": state }
         const finalResponse = await ApiService.post(url, payload, false)
         console.log("masterResp", JSON.stringify(finalResponse))
@@ -321,7 +321,7 @@ const WeatherScreen = ({ route }) => {
 
                 <View style={styles.weatherDescription}>
 
-                  <Text style={[styles.weatherDescText, { color:Colors.yellow_rgba, fontWeight: "400", minWidth: "80%", fontSize: 15 }]}>
+                  <Text style={[styles.weatherDescText, { color: Colors.yellow_rgba, fontWeight: "400", minWidth: "80%", fontSize: 15 }]}>
                     {todayForecast[0]?.weather_description || "--"}
                   </Text>
 
@@ -339,7 +339,7 @@ const WeatherScreen = ({ route }) => {
                   <View style={styles.tempRange}>
                     {todayForecast[0]?.max_temp ?
                       <View style={styles.todaysWeatherContainer}>
-                        <Text style={[styles.rangeText, { color:Colors.lightish_grey }]}>
+                        <Text style={[styles.rangeText, { color: Colors.lightish_grey }]}>
                           {`${translate('High')} ${Math.round(todayForecast[0]?.max_temp)}`}
                         </Text>
                         <Text style={[styles.degree2Text, { color: Colors.lightish_grey }]}>{"°"}</Text>
@@ -396,7 +396,7 @@ const WeatherScreen = ({ route }) => {
             setSelectedFilter(translate("Days_Forecast_15"))
             setSelectedWeather('')
           }} activeOpacity={0.5} style={[selectedFilter === translate("Days_Forecast_15") ? styles.tabTextcontainer : styles.tabTextcontainer1, { width: "25%", height: 30 }]}>
-            <Text style={[styles.tabText, { color: selectedFilter === translate("Days_Forecast_15") ? Colors.secondaryColor : Colors.app_theme_color,}]}>{translate("Days_Forecast_15")}</Text>
+            <Text style={[styles.tabText, { color: selectedFilter === translate("Days_Forecast_15") ? Colors.secondaryColor : Colors.app_theme_color, }]}>{translate("Days_Forecast_15")}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => {
@@ -406,7 +406,7 @@ const WeatherScreen = ({ route }) => {
             }
           }} activeOpacity={0.5} style={[
             selectedFilter === translate("Hourly") ? styles.tabTextcontainer : styles.tabTextcontainer1, { width: "25%", height: 30, marginHorizontal: 5 }]}>
-            <Text style={[styles.tabText, { color: selectedFilter === translate("Hourly") ? Colors.secondaryColor : Colors.app_theme_color}]}>3 {translate("Hourly")}</Text>
+            <Text style={[styles.tabText, { color: selectedFilter === translate("Hourly") ? Colors.secondaryColor : Colors.app_theme_color }]}>3 {translate("Hourly")}</Text>
           </TouchableOpacity>
 
 
@@ -418,7 +418,7 @@ const WeatherScreen = ({ route }) => {
             }
           }} activeOpacity={0.5} style={[
             selectedFilter === translate('PestForecast') ? styles.tabTextcontainer : styles.tabTextcontainer1, { width: "25%", height: 30, }]}>
-            <Text style={[styles.tabText, { color: selectedFilter === translate('PestForecast') ? Colors.secondaryColor : Colors.app_theme_color}]}>{translate('PestForecast')}</Text>
+            <Text style={[styles.tabText, { color: selectedFilter === translate('PestForecast') ? Colors.secondaryColor : Colors.app_theme_color }]}>{translate('PestForecast')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -465,9 +465,9 @@ const WeatherScreen = ({ route }) => {
               <View style={styles.cropsListMaincontainer}>
                 <View style={styles.calendarDropDownMainContainer}>
                   <Text style={styles.sowingdateText}>{translate("Crop")}</Text>
-                  <TouchableOpacity onPress={()=>setShowDropDowns(true)} style={[styles.textInputContainer, { borderColor: Colors.lightish_grey }]}>
+                  <TouchableOpacity onPress={() => setShowDropDowns(true)} style={[styles.textInputContainer, { borderColor: Colors.lightish_grey }]}>
                     <Text style={styles.selectCropTextInput}>{selectedCrop != undefined && selectedCrop != translate('select') ? selectedCrop : translate('select')}</Text>
-                    <Image source={require('../../assets/Images/down_arow.png')} style={[styles.dropDownIcon, { tintColor:Colors.black_color }]} />
+                    <Image source={require('../../assets/Images/down_arow.png')} style={[styles.dropDownIcon, { tintColor: Colors.black_color }]} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.calendarDropDownMainContainer}>
@@ -555,7 +555,7 @@ const WeatherScreen = ({ route }) => {
                           }
                         }}
                         style={[{ backgroundColor: Colors.app_theme_color, borderRadius: 5, padding: 5, alignItems: "center", justifyContent: "center", marginLeft: 10 }]}>
-                        <Image style={[{ height: 10, width: 10, tintColor:Colors.secondaryColor }]} resizeMode='contain' source={selectedWeather === item ? require('../../assets/Images/up_arrow.png') : require('../../assets/Images/down_arow.png')}></Image>
+                        <Image style={[{ height: 10, width: 10, tintColor: Colors.secondaryColor }]} resizeMode='contain' source={selectedWeather === item ? require('../../assets/Images/up_arrow.png') : require('../../assets/Images/down_arow.png')}></Image>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -566,7 +566,7 @@ const WeatherScreen = ({ route }) => {
 
 
                       <View style={styles.weatherDescription}>
-                        <Text style={[styles.weatherDescText, { color:Colors.yellow_rgba, fontFamily: "Poppins-SemiBold", fontWeight: "400", minWidth: "80%", fontSize: 15 }]}>
+                        <Text style={[styles.weatherDescText, { color: Colors.yellow_rgba, fontFamily: "Poppins-SemiBold", fontWeight: "400", minWidth: "80%", fontSize: 15 }]}>
                           {selectedWeather?.data[0]?.weather_description || "--"}
                         </Text>
 
@@ -634,7 +634,7 @@ const WeatherScreen = ({ route }) => {
                       </Text>
                     </View>
                   </View>
-                  <View style={{ width: '100%', height: 1, borderBottomWidth: 0.5, borderColor:Colors.lightgrey, marginTop: 10 }} />
+                  <View style={{ width: '100%', height: 1, borderBottomWidth: 0.5, borderColor: Colors.lightgrey, marginTop: 10 }} />
                   <FlatList
                     data={item?.data}
                     nestedScrollEnabled={true}
@@ -684,7 +684,7 @@ const WeatherScreen = ({ route }) => {
                     <View style={styles.tempContainer}>
                       {(
                         <View style={styles.tempWrapper}>
-                          <Text style={[styles.tempText, { color:Colors.textColor }]}>
+                          <Text style={[styles.tempText, { color: Colors.textColor }]}>
                             {selectedFilter === translate("Days_Forecast_15") ? item?.displayDay : item?.data[0]?.displayDay || '--'}
                           </Text>
                         </View>
@@ -711,7 +711,7 @@ const WeatherScreen = ({ route }) => {
                       </View>
                     </View>
                     {selectedFilter !== translate("Days_Forecast_15") && <View style={[{ backgroundColor: Colors.app_theme_color, borderRadius: 5, padding: 5, alignItems: "center", justifyContent: "center" }]}>
-                      <Image style={[{ height: 10, width: 10, tintColor:Colors.secondaryColor }]} resizeMode='contain' source={selectedWeather === item ? require('../../assets/Images/up_arrow.png') : require('../../assets/Images/up_arrow.png')}></Image>
+                      <Image style={[{ height: 10, width: 10, tintColor: Colors.secondaryColor }]} resizeMode='contain' source={selectedWeather === item ? require('../../assets/Images/up_arrow.png') : require('../../assets/Images/up_arrow.png')}></Image>
 
                     </View>}
                   </TouchableOpacity>
@@ -719,7 +719,7 @@ const WeatherScreen = ({ route }) => {
             }}
           />
         }
-         <Modal visible={isCalendarVisible} transparent animationType="slide">
+        <Modal visible={isCalendarVisible} transparent animationType="slide">
           <TouchableWithoutFeedback>
 
             <View style={styles.modalMainContainer}>
@@ -729,7 +729,7 @@ const WeatherScreen = ({ route }) => {
                   borderRadius: 40, height: 25, width: 25, alignItems: "center", justifyContent: "center",
                   backgroundColor: Colors.textColor
                 }}>
-                  <Image source={require("../../assets/Images/crossIcon.png")} style={{ height: 10, width: 10, resizeMode: "contain", tintColor:Colors.white_color}} />
+                  <Image source={require("../../assets/Images/crossIcon.png")} style={{ height: 10, width: 10, resizeMode: "contain", tintColor: Colors.white_color }} />
                 </TouchableOpacity>
                 <Calendar
                   onDayPress={(day) => {
@@ -739,7 +739,7 @@ const WeatherScreen = ({ route }) => {
                     setCalendarVisible(false);
                   }}
                   markedDates={
-                    selectedDate ? { [selectedDate]: { selected: true, marked: true, selectedColor: Colors.app_theme_color} } : {}
+                    selectedDate ? { [selectedDate]: { selected: true, marked: true, selectedColor: Colors.app_theme_color } } : {}
                   }
                 />
               </View>
@@ -747,46 +747,46 @@ const WeatherScreen = ({ route }) => {
           </TouchableWithoutFeedback>
         </Modal>
 
-         <Modal
-            supportedOrientations={['portrait', 'landscape']}
-            visible={showDropDowns}
-            // onRequestClose={onBackdropPress}
-            animationType='slide'
-            transparent={true}
-            // style={style}
-            >
-            <View style={styles.modalMainContainer1}>
-                <View style={styles.modalSubParentContainer}>
-                    <View style={styles.closeBtnContainer}>
-                        <TouchableOpacity onPress={()=>setShowDropDowns(false)}>
-                            <Image source={require('../../assets/Images/crossIcon.png')} style={styles.closeIcon} />
-                        </TouchableOpacity>
-                    </View>
-                    {cropList?.length > 0 ? (
-                        <FlatList
-                            data={cropList}
-                            style={styles.flatListStyle}
-                            renderItem={({ item,index }) => (
-                                <TouchableOpacity onPress={() => onPressDropdownItem(item)}>
-                                    <View style={styles.flatListRenderStyles}>
-                                      <Text style={{color:Colors.textColor,fontSize:14,lineHeight:25}}>{item.name}</Text>
-                                    </View>
-                                    {cropList.length-1!==index &&
-                                    <View style={styles.lineDivider}/>
-                                }
-                                </TouchableOpacity>
-                            )}
-                            keyExtractor={(item, index) => index.toString()}
-                            showsVerticalScrollIndicator={false}
-                            nestedScrollEnabled
-                        />
-                    ) : (
-                        <View>
-                            <Text style={styles.noDataAvailable}>{translate("No_data_available")}</Text>
-                        </View>
-                    )}
+        <Modal
+          supportedOrientations={['portrait', 'landscape']}
+          visible={showDropDowns}
+          // onRequestClose={onBackdropPress}
+          animationType='slide'
+          transparent={true}
+        // style={style}
+        >
+          <View style={styles.modalMainContainer1}>
+            <View style={styles.modalSubParentContainer}>
+              <View style={styles.closeBtnContainer}>
+                <TouchableOpacity onPress={() => setShowDropDowns(false)}>
+                  <Image source={require('../../assets/Images/crossIcon.png')} style={styles.closeIcon} />
+                </TouchableOpacity>
+              </View>
+              {cropList?.length > 0 ? (
+                <FlatList
+                  data={cropList}
+                  style={styles.flatListStyle}
+                  renderItem={({ item, index }) => (
+                    <TouchableOpacity onPress={() => onPressDropdownItem(item)}>
+                      <View style={styles.flatListRenderStyles}>
+                        <Text style={{ color: Colors.textColor, fontSize: 14, lineHeight: 25 }}>{item.name}</Text>
+                      </View>
+                      {cropList.length - 1 !== index &&
+                        <View style={styles.lineDivider} />
+                      }
+                    </TouchableOpacity>
+                  )}
+                  keyExtractor={(item, index) => index.toString()}
+                  showsVerticalScrollIndicator={false}
+                  nestedScrollEnabled
+                />
+              ) : (
+                <View>
+                  <Text style={styles.noDataAvailable}>{translate("No_data_available")}</Text>
                 </View>
+              )}
             </View>
+          </View>
         </Modal>
         {loader && <CustomLoader visible={loader} />}
       </View>

@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import SimpleToast from 'react-native-simple-toast';
 import ImageResizer from 'react-native-image-resizer';
 import Geolocation from '@react-native-community/geolocation';
-import ApiConfig, { STATUS_CODE_SUCCESS_200 } from '../../Networks/ApiConfig';
+import { CONFIG_KEYS, configs_nvm, STATUS_CODE_SUCCESS_200 } from '../../Networks/ApiConfig';
 import ApiService from '../../Networks/ApiService';
 import { isNullOrEmptyNOTTrim } from '../../Utility/Utils';
 import CustomDiagnosticsLoader from '../../components/cropDiagnosisLoader';
@@ -86,7 +86,7 @@ const CropDiagnosticsScreen = ({ route }) => {
         setLoading(true)
         setCropLoading(false);
         setLoadingMessage(translate('please_wait_getting_data'))
-        const getCropDiseaseHistoryUrl = ApiConfig.BASE_URL_NVM + ApiConfig.CROPDIAGNOSTICS.CROPDISEASEIDENTIFICATIONHISTORY
+        const getCropDiseaseHistoryUrl = configs_nvm.BASE_URL_NVM + CONFIG_KEYS.CROPDIAGNOSTICS.CROPDISEASEIDENTIFICATIONHISTORY
         const responseResult = await ApiService.get(getCropDiseaseHistoryUrl);
         if (responseResult?.statusCode === STATUS_CODE_SUCCESS_200) {
           setLoading(false)
@@ -165,7 +165,7 @@ const CropDiagnosticsScreen = ({ route }) => {
         setLoading(false)
         setCropLoading(true)
         setLoadingMessage(translate('Detecting_Problem'))
-        var cropDiseaseNotificationUrl = ApiConfig.BASE_URL_NVM + ApiConfig.CROPDIAGNOSTICS.CROPDISEASEIDENTIFICATION;
+        var cropDiseaseNotificationUrl = configs_nvm.BASE_URL_NVM + CONFIG_KEYS.CROPDIAGNOSTICS.CROPDISEASEIDENTIFICATION;
         const jsonData = {
           latitude: latitude.toString(),
           longitude: longitude.toString(),

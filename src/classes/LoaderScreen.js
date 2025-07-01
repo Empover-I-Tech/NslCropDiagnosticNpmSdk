@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setCompanyDetails, setUserMenuControl, setUserProfile } from '../redux/slices/userDataSlice';
 import { initAppContext } from '../Utility/AppInitializer';
 import { changeLanguage } from '../Localization/Localisation';
+import { loadApiConfig } from '../Networks/ApiConfig';
 
 const LoaderScreen = ({ route }) => {
     const navigation = useNavigation();
@@ -18,7 +19,7 @@ const LoaderScreen = ({ route }) => {
             dispatch(setCompanyDetails(finalJSON?.companyDetails));
             dispatch(setUserMenuControl(finalJSON?.userMenuControl));
             dispatch(setUserProfile(finalJSON?.userProfile));
-
+            await loadApiConfig()
             if (finalJSON.classType === "WeatherScreen") {
                 navigation.replace(finalJSON.classType, {
                     itemData: finalJSON.itemData,
