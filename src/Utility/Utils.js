@@ -31,25 +31,9 @@ export const APPLICATIONNAME = "APPLICATIONNAME"
 export const FCMTOKEN = "FCMTOKEN"
 export const ROLEID = "ROLEID"
 export const REFFERALCODE = "REFFERALCODE"
-export const SDKAUTHENTICATIONKEY = "SDKAUTHENTICATIONKEY";
+export const SDKAUTHENTICATIONKEY="SDKAUTHENTICATIONKEY";
 export const APPENVPROD = "APPENVPROD"
 
-let appEnvProd = false;
-
-export const loadAppConfig = async () => {
-    try {
-        const storedValue = await getFromAsyncStorage(APPENVPROD);
-        appEnvProd = JSON.parse(storedValue); // converts "true" => true
-    } catch (e) {
-        appEnvProd = false; // fallback default
-    }
-
-    const baseUrl = appEnvProd
-        ? 'https://nvmretailpro.com:8443/rest/nsl/'
-        : 'http://3.110.159.82:8080/vyapar_mitra/rest/nsl/';
-
-    return baseUrl;
-};
 
 
 

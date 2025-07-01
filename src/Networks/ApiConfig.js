@@ -1,5 +1,3 @@
-import { APPENVPROD, getFromAsyncStorage, loadAppConfig } from "../Utility/Utils";
-
 export const FIREBASE_LOG = true;
 export const APP_ENV_PROD = false;
 
@@ -23,24 +21,21 @@ export var STATUS_CODE_5 = 5;
 export var STATUS_CODE_1 = 1;
 export var STATUS_CODE_OK = "OK";
 export var STATUS_CODE_601 = 601;
-let appEnvProd = loadAppConfig();
-console.log("appEnvProd", appEnvProd)
 
 
 export const MAP_MY_INDIA_KEY = "5zf2txekry89tciw19sgmjpo7w133ioj";
 export const MAP_MY_INDIA_URL = `https://apis.mapmyindia.com/advancedmaps/v1/${MAP_MY_INDIA_KEY}/rev_geocode`
 export default configs = {
-
-    BASE_URL_NVM: 'http://3.110.159.82:8080/vyapar_mitra/rest/nsl/',
-
-    CROPDIAGNOSTICS: {
-        CROPDISEASEIDENTIFICATIONHISTORY: "CropDiseaseIdentificationHistory",
-        CROPDISEASEIDENTIFICATION: 'processCropDiseaseIdentification',
+    BASE_URL_NVM:APP_ENV_PROD?'https://nvmretailpro.com:8443/rest/nsl/':'http://3.110.159.82:8080/vyapar_mitra/rest/nsl/',
+  
+    CROPDIAGNOSTICS:{
+        CROPDISEASEIDENTIFICATIONHISTORY:"CropDiseaseIdentificationHistory",
+        CROPDISEASEIDENTIFICATION : 'processCropDiseaseIdentification',
     },
     WEATHERDETAILS: {
         nslgetWeatherDetailsV1: "getWeatherDetailsV1",
-        getPestForecastCrops: "getPestForecastCrops",
-        getPestInformation: "getPestInformation",
-        getRemedies: "processCropDiseaseRemedy",
+        getPestForecastCrops:"getPestForecastCrops",
+        getPestInformation:"getPestInformation",
+        getRemedies:"processCropDiseaseRemedy",
     }
 }
