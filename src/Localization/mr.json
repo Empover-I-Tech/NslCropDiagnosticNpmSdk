@@ -52,5 +52,10 @@
   "remedy_recommendation": "उपचाराची शिफारस",
   "UploadImage": "प्रतिमा अपलोड करा",
   "camera": "कॅमेरा",
-  "gallery": "गॅलरी"
+  "gallery": "गॅलरी",
+  "Invalid_Selection": "अवैध निवड",
+  "valid_location": "कृपया वैध जमीन स्थान निवडा.",
+  "edit": "संपादित करा",
+  "save": "जतन करा",
+  "Map": "नकाशा"
 }

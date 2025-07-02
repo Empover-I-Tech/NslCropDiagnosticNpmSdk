@@ -52,5 +52,10 @@
   "remedy_recommendation": "చికిత్స సిఫార్సు",
   "UploadImage": "చిత్రాన్ని అప్‌లోడ్ చేయండి",
   "camera": "కెమెరా",
-  "gallery": "గ్యాలరీ"
+  "gallery": "గ్యాలరీ",
+  "Invalid_Selection": "చెల్లని ఎంపిక",
+  "valid_location": "దయచేసి సరైన భూమి స్థలాన్ని ఎంచుకోండి.",
+  "edit": "సవరించు",
+  "save": "సేవ్",
+  "Map": "పటము"
 }

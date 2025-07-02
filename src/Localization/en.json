@@ -52,5 +52,10 @@
   "remedy_recommendation": "Remedy recommendation",
   "UploadImage": "Upload Image",
   "camera": "Camera",
-  "gallery": "Gallery"
+  "gallery": "Gallery",
+  "Invalid_Selection": "Invalid Selection",
+  "valid_location": "Please select a valid land location.",
+  "Map": "Map",
+  "save": "Save",
+  "edit": "Edit"
 }
