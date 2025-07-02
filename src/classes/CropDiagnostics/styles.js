@@ -161,7 +161,7 @@ const styles=StyleSheet.create({
     noDataAvailableHistoryText:{
         color:Colors.black_color, 
         marginLeft: 10, 
-        fontFamily: "Poppins-SemiBold", 
+        fontFamily: "", 
         fontWeight: '500', 
         fontSize: 14 
     },
