@@ -57,5 +57,12 @@
   "valid_location": "Please select a valid land location.",
   "Map": "Map",
   "save": "Save",
-  "edit": "Edit"
+  "edit": "Edit",
+  "permission_required": "Permission Required",
+  "camera_permission_message": "Camera Permission is required for the application to capture Images/scan QR code",
+  "galleryDesc": "Gallery Permission is required to upload images from your device.",
+  "open_settings": "Open Settings",
+  "cameraDesc": "Camera Permission is required to capture images from your device.",
+  "cancel": "Cancel",
+  "location_error": "We are unable to trace your location. Please check your location and location settings."
 }

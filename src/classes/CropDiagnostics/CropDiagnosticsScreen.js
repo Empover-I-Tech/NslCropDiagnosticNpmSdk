@@ -211,6 +211,7 @@ const CropDiagnosticsScreen = ({ route }) => {
         } else {
           setCropLoading(false)
           setLoadingMessage("")
+          SimpleToast.show(translate('An_unexpected_error_occurred_Please_try_again'))
         }
       }
       catch (error) {
