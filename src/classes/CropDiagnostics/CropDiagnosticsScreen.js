@@ -235,6 +235,11 @@ const CropDiagnosticsScreen = ({ route }) => {
         compressImageQuality: 1.0,
         mediaType: 'photo'
       })
+       const ext = image.path.split('.').pop()?.toLowerCase();
+    if (!['jpg', 'jpeg', 'png'].includes(ext)) {
+      SimpleToast.show(translate('images_error'));
+      return;
+    }
       var response = await ImageResizer.createResizedImage(image.path, 900, 900, "JPEG", 80, 0, null)
       setImageData(response)
       setCameraRelatedPopUp(true)

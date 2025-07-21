@@ -64,5 +64,6 @@
   "open_settings": "Open Settings",
   "cameraDesc": "Camera Permission is required to capture images from your device.",
   "cancel": "Cancel",
-  "location_error": "We are unable to trace your location. Please check your location and location settings."
+  "location_error": "We are unable to trace your location. Please check your location and location settings.",
+  "images_error" : "Only Images are supported."
 }
