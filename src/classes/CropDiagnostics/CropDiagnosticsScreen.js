@@ -273,7 +273,7 @@ const CropDiagnosticsScreen = ({ route }) => {
     return (
       <View key={item.id} style={styles.eachCropDiagnosticsItemContainer}>
         <Image source={item.image} style={styles.eachCropDiagnosticsImage} />
-        <Text style={[{ color: item.textColor }, styles.eachCropDiagnosticsText]}>{translate(item.name)}</Text>
+        <Text style={[{ color: item.textColor,fontFamily:global.fontStyles.Regular, }, styles.eachCropDiagnosticsText]}>{translate(item.name)}</Text>
       </View>
     )
   }
@@ -284,20 +284,20 @@ const CropDiagnosticsScreen = ({ route }) => {
         <View style={styles.cropDiagnosticsHistoryListSubContainer}>
           <View style={styles.diseasesDetectedContainer}>
             <Image tintColor={Colors.app_theme_color} source={require('../../assets/Images/diseaseDetected.png')} style={styles.diseaseDetectedIcon} />
-            <Text style={[styles.diseasesDetectedTitle,{color:Colors.app_theme_color}]}>{item.cropDiseaseTitle != undefined ? item.cropDiseaseTitle : translate('No_Disease_Detected')}</Text>
+            <Text style={[styles.diseasesDetectedTitle,{color:Colors.app_theme_color,fontFamily:global.fontStyles.SemiBold}]}>{item.cropDiseaseTitle != undefined ? item.cropDiseaseTitle : translate('No_Disease_Detected')}</Text>
           </View>
           <View style={styles.diseasesDetectedDetailsContainer}>
             <View style={styles.diseasesDetectedDetailsSubContainer}>
               <Image source={item?.imageUrl ? { uri: item.imageUrl } : require('../../assets/Images/image_not_exist.png')} style={styles.diseasesDetectedImg} />
               <View>
-                <Text style={styles.diseasesDetectedDiseasesName}>{item?.diseaseName || ''}</Text>
-                <Text style={styles.diseasesCropName}>{item?.cropName || ''}</Text>
-                <Text style={styles.diseasesDetectedCreatedOnText}>{item?.createdOn?.split('T')[0] || ''}</Text>
+                <Text style={[styles.diseasesDetectedDiseasesName,{fontFamily:global.fontStyles.SemiBold}]}>{item?.diseaseName || ''}</Text>
+                <Text style={[styles.diseasesCropName,{fontFamily:global.fontStyles.Regular}]}>{item?.cropName || ''}</Text>
+                <Text style={[styles.diseasesDetectedCreatedOnText,{fontFamily:global.fontStyles.Regular}]}>{item?.createdOn?.split('T')[0] || ''}</Text>
               </View>
             </View>
           </View>
           <TouchableOpacity style={[styles.diseasesDetectedViewBtnContainer,{borderColor:Colors.app_theme_color,}]} onPress={() => navigation.navigate("CropDesiesDetection", { data: item })}>
-            <Text style={{color:Colors.app_theme_color,fontSize:14,lineHeight:25}}>{translate("View_Details")}</Text>
+            <Text style={{color:Colors.app_theme_color,fontSize:14,lineHeight:25,fontFamily:global.fontStyles.SemiBold}}>{translate("View_Details")}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -319,12 +319,12 @@ const CropDiagnosticsScreen = ({ route }) => {
       <CustomHeaders backBtnHandle={handleBackScreen} headersTitle={translate("Crop_Diagnostic_Tool")} />
       <View style={styles.tabsContainer}>
         <TouchableOpacity activeOpacity={0.5} onPress={() => setSelectedFilter(translate('Crop_Diagnostic'))} style={[selectedFilter === translate('Crop_Diagnostic') && { backgroundColor: Colors.app_theme_color }, styles.tabSubContainer]}>
-          <Text style={[{ color: selectedFilter === translate('Crop_Diagnostic') ? Colors.secondaryColor : Colors.black_color }, styles.tabText]}>{translate('Crop_Diagnostic')}</Text>
+          <Text style={[{fontFamily:global.fontStyles.SemiBold,color: selectedFilter === translate('Crop_Diagnostic') ? Colors.secondaryColor : Colors.black_color }, styles.tabText]}>{translate('Crop_Diagnostic')}</Text>
         </TouchableOpacity>
         <TouchableOpacity activeOpacity={0.5} onPress={() => {
           setSelectedFilter(translate('history'));
         }} style={[selectedFilter === translate('history') && { backgroundColor: Colors.app_theme_color }, styles.tabSubContainer]}>
-          <Text style={[{ color: selectedFilter === translate('history') ? Colors.secondaryColor : Colors.black_color }, styles.tabText]}>{translate('history')}</Text>
+          <Text style={[{fontFamily:global.fontStyles.SemiBold, color: selectedFilter === translate('history') ? Colors.secondaryColor : Colors.black_color }, styles.tabText]}>{translate('history')}</Text>
         </TouchableOpacity>
       </View>
       {
@@ -355,7 +355,7 @@ const CropDiagnosticsScreen = ({ route }) => {
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={<>
               <View style={styles.noDataAvailableTextContainer}>
-                <Text style={styles.noDataText}>
+                <Text style={[styles.noDataText,{fontFamily:global.fontStyles.SemiBold,}]}>
                   {translate('No_data_available')}
                 </Text>
               </View>
@@ -382,25 +382,25 @@ const CropDiagnosticsScreen = ({ route }) => {
                         }
                         else { openCameraProfilePic() }
                       }} style={[styles.button, { borderColor:Colors.app_theme_color,backgroundColor:Colors.secondaryColor }]}>
-                        <Text style={[styles.buttonText, { color: Colors.app_theme_color }]}>{fromGallery ? translate("ReSelect") : translate('Re-Take')}</Text>
+                        <Text style={[styles.buttonText, { color: Colors.app_theme_color,fontFamily:global.fontStyles.Regular }]}>{fromGallery ? translate("ReSelect") : translate('Re-Take')}</Text>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => {
                         submitCrop()
                         setCameraRelatedPopUp(false)
                       }} style={[styles.button, { borderColor: Colors.app_theme_color, backgroundColor: Colors.app_theme_color, }]}>
-                        <Text style={[styles.buttonText, { color:Colors.secondaryColor }]}>{translate('proceed')}</Text>
+                        <Text style={[styles.buttonText, { color:Colors.secondaryColor ,fontFamily:global.fontStyles.Regular}]}>{translate('proceed')}</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
                   :
                   <View style={[styles.subContainer]}>
                     <TouchableOpacity onPress={() => { storeData(true) }} style={styles.dontShowAgainBtnContainer}>
-                      <Text style={[styles.dontShowAgainText,{color:Colors.app_theme_color}]}>{translate('Dont_show_this_again')}</Text>
+                      <Text style={[styles.dontShowAgainText,{color:Colors.app_theme_color,fontFamily:global.fontStyles.SemiBold }]}>{translate('Dont_show_this_again')}</Text>
                     </TouchableOpacity>
                     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                       <Image style={styles.cameraPopupIcon} source={require('../../assets/Images/cameraPopup.png')} />
-                      <Text style={[styles.carouselNameText,{color:Colors.app_theme_color}]}>{CarouselDATA[carouselIndex].name}</Text>
-                      <Text style={styles.carouselDesText}>{CarouselDATA[carouselIndex].desc}</Text>
+                      <Text style={[styles.carouselNameText,{color:Colors.app_theme_color,fontFamily:global.fontStyles.Regular }]}>{CarouselDATA[carouselIndex].name}</Text>
+                      <Text style={[styles.carouselDesText,{fontFamily:global.fontStyles.Regular }]}>{CarouselDATA[carouselIndex].desc}</Text>
 
                       <View style={styles.lineDividerContainer}>
                           <View style={[carouselIndex === 0 ? {
@@ -436,7 +436,7 @@ const CropDiagnosticsScreen = ({ route }) => {
                         setCarouselIndex(1)
                         openCameraProfilePic()
                       }} style={[styles.button,{ borderColor: Colors.app_theme_color,backgroundColor:Colors.secondaryColor }]}>
-                        <Text style={[styles.buttonText, { color: Colors.app_theme_color }]}>{translate('skip')}</Text>
+                        <Text style={[styles.buttonText, { color: Colors.app_theme_color ,fontFamily:global.fontStyles.Regular }]}>{translate('skip')}</Text>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => {
                         if (carouselIndex === 0) {
@@ -445,7 +445,7 @@ const CropDiagnosticsScreen = ({ route }) => {
                           openCameraProfilePic()
                         }
                       }} style={[styles.button, { borderColor: Colors.app_theme_color, backgroundColor: Colors.app_theme_color, }]}>
-                        <Text style={[styles.buttonText, { color:Colors.secondaryColor }]}>{translate('Next')}</Text>
+                        <Text style={[styles.buttonText, { color:Colors.secondaryColor,fontFamily:global.fontStyles.Regular }]}>{translate('Next')}</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -487,7 +487,7 @@ const CropDiagnosticsScreen = ({ route }) => {
               showsVerticalScrollIndicator={false}
               ListEmptyComponent={<>
                 <View style={styles.noDataAvailableTextContainer}>
-                  <Text style={styles.noDataText}>
+                  <Text style={[styles.noDataText,{fontFamily:global.fontStyles.SemiBold}]}>
                     {translate('No_data_available')}
                   </Text>
                 </View>
@@ -497,7 +497,7 @@ const CropDiagnosticsScreen = ({ route }) => {
             />
           ) : (
             <View style={styles.noDataAvaiableHistoryContainer}>
-              <Text style={styles.noDataAvailableHistoryText}>{translate('No_data_available')}</Text>
+              <Text style={[styles.noDataAvailableHistoryText,{fontFamily:global.fontStyles.SemiBold}]}>{translate('No_data_available')}</Text>
             </View>
           )}
         </View>

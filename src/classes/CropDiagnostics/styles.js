@@ -60,7 +60,6 @@ const styles=StyleSheet.create({
         height: 60
     },
     noDataText: {
-        fontWeight: "500",
         fontSize: 16,
         color:Colors.black_color
     },
@@ -114,7 +113,6 @@ const styles=StyleSheet.create({
     },
     buttonText: {
         fontSize: 14,
-        fontWeight: '400',
     },
     dontShowAgainBtnContainer:{
         position: "absolute", 
@@ -123,7 +121,6 @@ const styles=StyleSheet.create({
     },
     dontShowAgainText:{
         fontSize: 12,
-        fontWeight:"500"
     },
     cameraPopupIcon:{
          height: 250, 
@@ -162,7 +159,6 @@ const styles=StyleSheet.create({
         color:Colors.black_color, 
         marginLeft: 10, 
         fontFamily: "", 
-        fontWeight: '500', 
         fontSize: 14 
     },
     cropDiagnosticsHistoryListContainer: {

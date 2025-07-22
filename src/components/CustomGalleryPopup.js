@@ -47,7 +47,7 @@ const CustomGalleryPopup = ({ showOrNot, onPressingOut, onPressingGallery, onPre
               <Image source={require('../assets/Images/crossMark.png')} style={{ tintColor:Colors.black_color, height: 20, width: 20, resizeMode: "contain" }} />
             </TouchableOpacity>
             <View style={stylesheetStyes.galleryImage}>
-              <Text style={[stylesheetStyes.uploadText, { color:Colors.black_color },]}>
+              <Text style={[stylesheetStyes.uploadText, { color:Colors.black_color,fontFamily:global.fontStyles.Bold},]}>
                 {translate('UploadImage')}
               </Text>
               <View style={stylesheetStyes.cameraOverallView}>
@@ -64,7 +64,7 @@ const CustomGalleryPopup = ({ showOrNot, onPressingOut, onPressingGallery, onPre
                       resizeMode="contain"
                     />
                   </TouchableOpacity>
-                  <Text style={[stylesheetStyes.text11, { color:Colors.black_color },]}>{translate('camera')}</Text>
+                  <Text style={[stylesheetStyes.text11, { color:Colors.black_color,fontFamily:global.fontStyles.Bold },]}>{translate('camera')}</Text>
                 </View>
                 <View style={stylesheetStyes.cameraView}>
                   <TouchableOpacity
@@ -80,7 +80,7 @@ const CustomGalleryPopup = ({ showOrNot, onPressingOut, onPressingGallery, onPre
                     />
 
                   </TouchableOpacity>
-                  <Text style={[stylesheetStyes.text11, { color:Colors.black_color },]}>{translate('gallery')}</Text>
+                  <Text style={[stylesheetStyes.text11, { color:Colors.black_color,fontFamily:global.fontStyles.Bold },]}>{translate('gallery')}</Text>
                 </View>
               </View>
             </View>
@@ -97,7 +97,6 @@ const stylesheetStyes = StyleSheet.create({
     marginLeft: responsiveWidth(5),
     marginTop: responsiveHeight(4),
     // color: COLORS.darkBlueGrey,
-    fontWeight: "bold",
   },
   subContainer: {
     height: responsiveHeight(22.5),
@@ -117,7 +116,6 @@ const stylesheetStyes = StyleSheet.create({
   },
   text11: {
     // color: COLORS.darkBlueGrey,
-    fontWeight: "bold",
     marginRight: responsiveWidth(10),
     marginTop: responsiveHeight(2),
   },

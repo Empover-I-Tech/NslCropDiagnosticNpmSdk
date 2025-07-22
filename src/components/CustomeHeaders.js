@@ -22,7 +22,7 @@ const CustomHeaders=({headersTitle,backBtnHandle})=>{
                     <TouchableOpacity onPress={()=>backBtnHandle()}>
                         <Image source={require("../assets/Images/ScreenBackIcon.png")} style={styles.backIcon} />
                     </TouchableOpacity>
-                    <Text style={[styles.headersTitleText,{color:Colors.secondaryColor}]}>{headersTitle}</Text>
+                    <Text style={[styles.headersTitleText,{color:Colors.secondaryColor,fontFamily:global.fontStyles.SemiBold}]}>{headersTitle}</Text>
                     <View style={styles.dummyContainer} />
                 </View>
             </SafeAreaView>
@@ -46,7 +46,6 @@ const styles=StyleSheet.create({
         width:"100%",
     },
     headersTitleText:{
-        fontWeight:"500",
         fontSize:17,
         lineHeight:25
     },
