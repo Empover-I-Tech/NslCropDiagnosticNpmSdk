@@ -142,7 +142,6 @@ const CropDiagnosticsScreen = ({ route }) => {
   ];
 
   const openCameraProfilePic = async () => {
-    setShowSelectionModal(false)
     try {
       var image = await ImagePicker.openCamera({
         cropping: false,
@@ -152,11 +151,12 @@ const CropDiagnosticsScreen = ({ route }) => {
       })
       var response = await ImageResizer.createResizedImage(image.path, 900, 900, "JPEG", 80, 0, null)
       setImageData(response)
-      setFromGallery(false)
       setCameraRelatedPopUp(true)
+      setFromGallery(false)
     } catch (err) {
       console.error(err)
     }
+    setShowSelectionModal(false)
   }
 
   const submitCrop = async () => {
@@ -227,7 +227,6 @@ const CropDiagnosticsScreen = ({ route }) => {
 
 
   const openImagePickerProfilePic = async () => {
-    setShowSelectionModal(false)
     try {
       var image = await ImagePicker.openPicker({
         cropping: false,
@@ -247,6 +246,7 @@ const CropDiagnosticsScreen = ({ route }) => {
     } catch (err) {
       console.error(err)
     }
+    setShowSelectionModal(false)
   }
 
   const storeData = async (value) => {
@@ -364,7 +364,7 @@ const CropDiagnosticsScreen = ({ route }) => {
             keyExtractor={item => item.id}
           />
 
-          <Modal
+          {cameraRelatedPopUp && !showSelectionModal && <Modal
             animationType="fade"
             transparent={true}
             visible={cameraRelatedPopUp}
@@ -452,7 +452,7 @@ const CropDiagnosticsScreen = ({ route }) => {
                 }
               </TouchableWithoutFeedback>
             </View>
-          </Modal>
+          </Modal>}
         </View>
       }
       <CustomGalleryPopup
@@ -462,10 +462,19 @@ const CropDiagnosticsScreen = ({ route }) => {
           if (await checkData()) {
             openCameraProfilePic()
           } else {
-            setCameraRelatedPopUp(true), setShowSelectionModal(false), setImageData(null), setCarouselIndex(0)
+            setShowSelectionModal(false),
+            setTimeout(()=>{
+              setCameraRelatedPopUp(true)
+              setImageData(null)
+               setCarouselIndex(0)
+            },500)
           }
         }}
-        onPressingGallery={() => { setImageData(null), openImagePickerProfilePic() }}
+        onPressingGallery={() => { setImageData(null),
+          setShowSelectionModal(false),
+          setTimeout(()=>{
+            openImagePickerProfilePic()
+          },500) }}
       />
 
       {
