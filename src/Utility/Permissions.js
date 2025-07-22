@@ -39,7 +39,7 @@ export const requestCameraPermission = async (translate) => {
     }
   } else if (Platform.OS == 'ios') {
     const status = await request(PERMISSIONS.IOS.CAMERA);
-    if (status === RESULTS.GRANTED) {
+    if (status === RESULTS.GRANTED||status===RESULTS.LIMITED) {
       return { granted: true };
     } else if (status === RESULTS.BLOCKED) {
       if (translate) showPermissionAlert('camera', translate);
@@ -88,7 +88,7 @@ export const requestGalleryPermission = async (translate) => {
   } else if (Platform.OS === 'ios') {
     try {
       const status = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
-      if (status === RESULTS.GRANTED) {
+      if (status === RESULTS.GRANTED||status===RESULTS.LIMITED) {
         return { granted: true };
       } else if (status === RESULTS.BLOCKED) {
         if (translate) showPermissionAlert('gallery', translate);

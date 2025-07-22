@@ -162,9 +162,13 @@ const CropDiagnosticsScreen = ({ route }) => {
   const submitCrop = async () => {
     if (isConnected) {
       try {
-        setLoading(false)
-        setCropLoading(true)
-        setLoadingMessage(translate('Detecting_Problem'))
+        setTimeout(()=>{
+          setLoading(false)
+          setLoadingMessage(translate('Detecting_Problem'))
+        },200)
+        setTimeout(() => {
+          setCropLoading(true)
+        }, 600)
         var cropDiseaseNotificationUrl = configs_nvm.BASE_URL_NVM + CONFIG_KEYS.CROPDIAGNOSTICS.CROPDISEASEIDENTIFICATION;
         const jsonData = {
           latitude: latitude.toString(),
@@ -460,7 +464,10 @@ const CropDiagnosticsScreen = ({ route }) => {
         onPressingOut={() => setShowSelectionModal(false)}
         onPressingCamera={async () => {
           if (await checkData()) {
-            openCameraProfilePic()
+            setShowSelectionModal(false),
+            setTimeout(() => {
+              openCameraProfilePic()
+            }, 500)
           } else {
             setShowSelectionModal(false),
             setTimeout(()=>{
@@ -470,11 +477,13 @@ const CropDiagnosticsScreen = ({ route }) => {
             },500)
           }
         }}
-        onPressingGallery={() => { setImageData(null),
+        onPressingGallery={() => {
+          setImageData(null),
           setShowSelectionModal(false),
           setTimeout(()=>{
             openImagePickerProfilePic()
-          },500) }}
+          },500)
+         }}
       />
 
       {
