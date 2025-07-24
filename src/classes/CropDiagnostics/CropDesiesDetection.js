@@ -62,8 +62,8 @@ const CropDesiesDetection = ({ route }) => {
               <View style={styles.detectSubCard}>
                 <View style={styles.diseaseDetailsNameContainer}>
                   <View>
-                    <Text style={[styles.diseaseNameText,{fontFamily:fonts.Bold}]}>{translate('disease_name')}</Text>
-                    <Text style={[styles.diseaseName,{fontFamily:fonts.SemiBold}]}>{diseaseName || translate('not_available')}</Text>
+                    <Text style={[styles.diseaseNameText,{fontFamily:global.fontStyles.Bold }]}>{translate('disease_name')}</Text>
+                    <Text style={[styles.diseaseName,{fontFamily:global.fontStyles.SemiBold }]}>{diseaseName || translate('not_available')}</Text>
                   </View>
                   <TouchableOpacity
                     style={styles.whatsappIconContainer}
@@ -76,14 +76,14 @@ const CropDesiesDetection = ({ route }) => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.dividerLine} />
-                <Text style={[styles.mostPossibleDiagnosisText,{fontFamily:fonts.SemiBold}]}>{translate('most_possible_diagnosis')}</Text>
+                <Text style={[styles.mostPossibleDiagnosisText,{fontFamily:global.fontStyles.SemiBold }]}>{translate('most_possible_diagnosis')}</Text>
                 <View style={styles.diagnosisTextContainer}>
-                  <Text style={[styles.diagnosisText,{fontFamily:fonts.Regular}]}>{diagnosis || translate('not_available')}</Text>
+                  <Text style={[styles.diagnosisText,{fontFamily:global.fontStyles.Regular}]}>{diagnosis || translate('not_available')}</Text>
                   {advisory.map((item, index) => {
                     return (
                       <View key={index.toString()} style={styles.diagnosisPointsContainer}>
-                        <Text style={[styles.diagnosisPointText,{fontFamily:fonts.Regular}]}>{index + 1}. </Text>
-                        <Text style={[styles.diagnosisPointText,{fontFamily:fonts.Regular}]}>{item.point}</Text>
+                        <Text style={[styles.diagnosisPointText,{fontFamily:global.fontStyles.Regular}]}>{index + 1}. </Text>
+                        <Text style={[styles.diagnosisPointText,{fontFamily:global.fontStyles.Regular}]}>{item.point}</Text>
                       </View>
                     )
                   })}
