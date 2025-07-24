@@ -255,13 +255,10 @@ const styles=StyleSheet.create({
     },
     diseaseNameText:{
         fontSize: 14,  
-        fontWeight: "bold",
         color:Colors.lightish_grey,
     },
     diseaseName:{
          color:Colors.black_color, 
-         fontFamily: "Inter-Bold", 
-         fontWeight: '900', 
          fontSize: 14 
     },
     whatsappIconContainer: {
@@ -288,7 +285,6 @@ const styles=StyleSheet.create({
     mostPossibleDiagnosisText: {
         color:Colors.black_color,
         marginLeft: 10,
-        fontWeight: '500',
         fontSize:14,
         lineHeight: 25
     },
@@ -300,7 +296,6 @@ const styles=StyleSheet.create({
         color:Colors.black_color, 
         marginLeft: 10, 
         margin: 2, 
-        fontWeight: '400', 
         fontSize: 14, 
         lineHeight: 25 
     },
