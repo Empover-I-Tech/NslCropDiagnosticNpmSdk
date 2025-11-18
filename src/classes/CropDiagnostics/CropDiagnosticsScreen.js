@@ -164,11 +164,12 @@ const CropDiagnosticsScreen = ({ route }) => {
       try {
         setTimeout(()=>{
           setLoading(false)
+          setCropLoading(true)
           setLoadingMessage(translate('Detecting_Problem'))
         },200)
-        setTimeout(() => {
-          setCropLoading(true)
-        }, 600)
+        // setTimeout(() => {
+        //   setCropLoading(true)
+        // }, 600)
         var cropDiseaseNotificationUrl = configs_nvm.BASE_URL_NVM + CONFIG_KEYS.CROPDIAGNOSTICS.CROPDISEASEIDENTIFICATION;
         const jsonData = {
           latitude: latitude.toString(),
