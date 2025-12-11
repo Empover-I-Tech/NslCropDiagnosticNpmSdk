@@ -335,7 +335,33 @@ const CropDiagnosticsScreen = ({ route }) => {
       {
         selectedFilter === translate('Crop_Diagnostic') &&
         <View style={styles.cropDiagnosticsMainContainer}>
-          <FlatList
+            
+             <View style={{ height: '70%', justifyContent: 'center', alignItems: 'center' }}>
+            <Image
+              source={require('../../assets/Images/cd_home_page_info.png')}
+              resizeMode="contain"
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          </View>
+          <View style={styles.listFooterContainer}>
+            <CustomButton
+              btnText={translate("Take_a_Picture")}
+              btnWidth={"100%"}
+              btnHeight={45}
+              btnRadius={6}
+              btnColor={Colors.app_theme_color}
+              textColor={Colors.white_color}
+              borderColor={Colors.app_theme_color}
+              borderWidth={0.5}
+              fontSize={14}
+              marginTop={10}
+              onPress={() => setShowSelectionModal(true)}
+            />
+          </View>
+            {/*<FlatList
             data={cropDiagDATA}
             ListFooterComponent={
               <>
@@ -367,7 +393,7 @@ const CropDiagnosticsScreen = ({ route }) => {
             </>}
             renderItem={renderCropDiagnosticsList}
             keyExtractor={item => item.id}
-          />
+          />*/}
 
           {cameraRelatedPopUp && !showSelectionModal && <Modal
             animationType="fade"
