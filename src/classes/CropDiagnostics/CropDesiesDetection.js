@@ -1,9 +1,10 @@
-import { ScrollView, Text, View, Image, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, View, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { translate } from '../../Localization/Localisation';
 import { useNavigation } from '@react-navigation/native';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
+import RenderHTML from 'react-native-render-html';
 import CustomHeaders from '../../components/CustomeHeaders';
 import styles from './styles';
 
@@ -14,6 +15,8 @@ const CropDesiesDetection = ({ route }) => {
   const [diagnosis, setDiagnosis] = useState('');
   const [advisory, setAdvisory] = useState([]);
   const viewShotRef = useRef(null);
+  const { width } = useWindowDimensions();
+
 
   useEffect(() => {
     const data = route?.params?.data;
@@ -62,8 +65,8 @@ const CropDesiesDetection = ({ route }) => {
               <View style={styles.detectSubCard}>
                 <View style={styles.diseaseDetailsNameContainer}>
                   <View>
-                    <Text style={[styles.diseaseNameText,{fontFamily:global.fontStyles.Bold }]}>{translate('disease_name')}</Text>
-                    <Text style={[styles.diseaseName,{fontFamily:global.fontStyles.SemiBold }]}>{diseaseName || translate('not_available')}</Text>
+                    <Text style={[styles.diseaseNameText, { fontFamily: global.fontStyles.Bold }]}>{translate('disease_name')}</Text>
+                    <Text style={[styles.diseaseName, { fontFamily: global.fontStyles.SemiBold }]}>{diseaseName || translate('not_available')}</Text>
                   </View>
                   <TouchableOpacity
                     style={styles.whatsappIconContainer}
@@ -76,14 +79,20 @@ const CropDesiesDetection = ({ route }) => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.dividerLine} />
-                <Text style={[styles.mostPossibleDiagnosisText,{fontFamily:global.fontStyles.SemiBold }]}>{translate('most_possible_diagnosis')}</Text>
+                <Text style={[styles.mostPossibleDiagnosisText, { fontFamily: global.fontStyles.SemiBold }]}>{translate('most_possible_diagnosis')}</Text>
                 <View style={styles.diagnosisTextContainer}>
-                  <Text style={[styles.diagnosisText,{fontFamily:global.fontStyles.Regular}]}>{diagnosis || translate('not_available')}</Text>
+                  <Text style={[styles.diagnosisText, { fontFamily: global.fontStyles.Regular }]}>{diagnosis || translate('not_available')}</Text>
                   {advisory.map((item, index) => {
                     return (
                       <View key={index.toString()} style={styles.diagnosisPointsContainer}>
-                        <Text style={[styles.diagnosisPointText,{fontFamily:global.fontStyles.Regular}]}>{index + 1}. </Text>
-                        <Text style={[styles.diagnosisPointText,{fontFamily:global.fontStyles.Regular}]}>{item.point}</Text>
+                        <Text style={[styles.diagnosisPointText, { fontFamily: global.fontStyles.Regular }]}>{index + 1}. </Text>
+                        {/* <Text style={[styles.diagnosisPointText,{fontFamily:global.fontStyles.Regular}]}>{item.point}</Text> */}
+                        <RenderHTML
+                          contentWidth={width}
+                          source={{ html: item.point }}
+                          baseStyle={[styles.diagnosisPointText,{fontFamily:global.fontStyles.Regular}]}
+
+                        />
                       </View>
                     )
                   })}
