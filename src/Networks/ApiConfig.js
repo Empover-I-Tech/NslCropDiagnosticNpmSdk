@@ -35,7 +35,7 @@ let BASE_URL_NVM = DEFAULT_DEV_URL;
 export const CONFIG_KEYS = {
     CROPDIAGNOSTICS: {
         CROPDISEASEIDENTIFICATIONHISTORY: "CropDiseaseIdentificationHistory_v1",
-        CROPDISEASEIDENTIFICATION: 'processCropDiseaseIdentification',
+        CROPDISEASEIDENTIFICATION: 'processCropDiseaseIdentification_v1',
     },
     WEATHERDETAILS: {
         nslgetWeatherDetailsV1: "getWeatherDetails_v2",
