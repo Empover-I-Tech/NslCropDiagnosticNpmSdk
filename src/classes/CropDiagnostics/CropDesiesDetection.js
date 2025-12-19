@@ -89,7 +89,7 @@ const CropDesiesDetection = ({ route }) => {
                   {advisory.map((item, index) => {
                     return (
                       <View key={index.toString()} style={styles.diagnosisPointsContainer}>
-                        <Text style={styles.diagnosisPointText}>{index + 1}. </Text>
+                        {/* <Text style={styles.diagnosisPointText}>{index + 1}. </Text> */}
                         {/* <Text style={styles.diagnosisPointText}>{item.point}</Text> */}
                          <RenderHTML
                           contentWidth={width}
