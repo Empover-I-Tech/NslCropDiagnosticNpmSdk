@@ -290,6 +290,7 @@ const styles=StyleSheet.create({
     },
     diagnosisTextContainer:{
         margin: 0, 
+        marginHorizontal: 10,
         width: '90%'
     },
     diagnosisText:{

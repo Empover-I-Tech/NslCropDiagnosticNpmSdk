@@ -34,7 +34,7 @@ const DEFAULT_DEV_URL = 'http://3.110.159.82:8080/beejkisan/rest/nsl/';
 let BASE_URL_NVM = DEFAULT_DEV_URL;
 export const CONFIG_KEYS = {
     CROPDIAGNOSTICS: {
-        CROPDISEASEIDENTIFICATIONHISTORY: "CropDiseaseIdentificationHistory",
+        CROPDISEASEIDENTIFICATIONHISTORY: "CropDiseaseIdentificationHistory_v1",
         CROPDISEASEIDENTIFICATION: 'processCropDiseaseIdentification',
     },
     WEATHERDETAILS: {
