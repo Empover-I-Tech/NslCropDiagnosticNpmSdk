@@ -78,7 +78,7 @@ const CropDesiesDetection = ({ route }) => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.dividerLine} />
-                <Text style={styles.mostPossibleDiagnosisText}>{translate('most_possible_diagnosis')}</Text>
+                {/* <Text style={styles.mostPossibleDiagnosisText}>{translate('most_possible_diagnosis')}</Text> */}
                 <View style={styles.diagnosisTextContainer}>
                   {/* <Text style={styles.diagnosisText}>{diagnosis || translate('not_available')}</Text> */}
                   <RenderHTML
