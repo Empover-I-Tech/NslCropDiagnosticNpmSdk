@@ -11,6 +11,8 @@ export const translationGetters = {
   te: () => require('./te.json'),
   hi: () => require('./hi.json'),
   mr: () => require('./mr.json'),
+  kn: () => require('./kn.json'),
+  ta: () => require('./ta.json'),
 };
 
 // Memoized translation function
